@@ -41,12 +41,10 @@ struct Rocket: Codable {
     }
 }
 
-// MARK: - Diameter
 struct Diameter: Codable {
     let meters, feet: Double?
 }
 
-// MARK: - Engines
 struct Engines: Codable {
     let isp: ISP?
     let thrustSeaLevel, thrustVacuum: Thrust?
@@ -69,7 +67,6 @@ struct Engines: Codable {
     }
 }
 
-// MARK: - ISP
 struct ISP: Codable {
     let seaLevel, vacuum: Int?
 
@@ -79,12 +76,10 @@ struct ISP: Codable {
     }
 }
 
-// MARK: - Thrust
 struct Thrust: Codable {
     let kN, lbf: Int?
 }
 
-// MARK: - FirstStage
 struct FirstStage: Codable {
     let thrustSeaLevel, thrustVacuum: Thrust?
     let reusable: Bool?
@@ -101,24 +96,20 @@ struct FirstStage: Codable {
     }
 }
 
-// MARK: - LandingLegs
 struct LandingLegs: Codable {
     let number: Int?
     let material: String?
 }
 
-// MARK: - Mass
 struct Mass: Codable {
     let kg, lb: Int?
 }
 
-// MARK: - PayloadWeight
 struct PayloadWeight: Codable {
     let id, name: String?
     let kg, lb: Int?
 }
 
-// MARK: - SecondStage
 struct SecondStage: Codable {
     let thrust: Thrust?
     let payloads: Payloads?
@@ -134,7 +125,6 @@ struct SecondStage: Codable {
     }
 }
 
-// MARK: - Payloads
 struct Payloads: Codable {
     let compositeFairing: CompositeFairing?
     let option1: String?
@@ -145,7 +135,6 @@ struct Payloads: Codable {
     }
 }
 
-// MARK: - CompositeFairing
 struct CompositeFairing: Codable {
     let height, diameter: Diameter?
 }

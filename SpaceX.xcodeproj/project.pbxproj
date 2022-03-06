@@ -23,6 +23,7 @@
 		F0711AB427D4D94A008806C7 /* RocketWikiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB327D4D94A008806C7 /* RocketWikiViewController.swift */; };
 		F0711AB627D4D968008806C7 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */; };
 		F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */; };
+		F0711ABA27D4DF04008806C7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB927D4DF04008806C7 /* UIImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 		F0711AB327D4D94A008806C7 /* RocketWikiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketWikiViewController.swift; sourceTree = "<group>"; };
 		F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
 		F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadDetailViewController.swift; sourceTree = "<group>"; };
+		F0711AB927D4DF04008806C7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				F0711AAF27D4D8E7008806C7 /* UIViewController.swift */,
+				F0711AB927D4DF04008806C7 /* UIImageView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -274,6 +277,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0711AB427D4D94A008806C7 /* RocketWikiViewController.swift in Sources */,
+				F0711ABA27D4DF04008806C7 /* UIImageView.swift in Sources */,
 				F0711AA527D4D78D008806C7 /* Rocket.swift in Sources */,
 				F0711AB627D4D968008806C7 /* LaunchDetailViewController.swift in Sources */,
 				F0711AB227D4D930008806C7 /* RocketDetailViewController.swift in Sources */,

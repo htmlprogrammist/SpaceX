@@ -76,7 +76,10 @@ extension RocketsViewController {
             switch result {
             case .success(let rockets):
                 strongSelf.rockets = rockets
-//                print(rockets)
+                
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
             case .failure(let error):
                 strongSelf.handleError(error: error)
             }
@@ -92,8 +95,7 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rocketsCell, for: indexPath)
-        cell.backgroundColor = .red
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rocketsCell, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
         return cell
     }
     
