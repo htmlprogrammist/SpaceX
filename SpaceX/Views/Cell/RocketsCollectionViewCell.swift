@@ -41,19 +41,9 @@ class RocketsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         for i in 0..<3 {
-            /*
             let mainLabel = UILabel(text: "Title")
             let subtitleLabel = UILabel(text: "Subtitle", color: .slateGray)
-            /*
-            let mainLabel = UILabel()
-            mainLabel.text = "Title"
-            let subtitleLabel = UILabel()
-            subtitleLabel.text = "Subtitle"
-            subtitleLabel.textColor = .slateGray
-            */
-            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel])
-            */
-            let subStackView = UILabel(text: "Hello, World!", color: .slateGray)
+            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
             mainStackView.addArrangedSubview(subStackView)
         }
         
@@ -71,7 +61,7 @@ class RocketsCollectionViewCell: UICollectionViewCell {
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20), // если делаешь 20, то ошибка исчезает, но на экране так же пусто
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
         ])
     }

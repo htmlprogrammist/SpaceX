@@ -21,17 +21,18 @@ class RocketsViewController: UIViewController {
     
     lazy var collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 60, height: 60)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 360)
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         return collectionView
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .white
+        view.backgroundColor = .glaucous
         
         getRockets()
         
@@ -92,6 +93,8 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rocketsCell, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
+        cell.backgroundColor = .white
+        cell.layer.cornerRadius = 20
         return cell
     }
     
