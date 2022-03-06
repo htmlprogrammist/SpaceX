@@ -30,4 +30,3 @@ There are not many screens, but there are quite a large number of different smal
 - The use of Storyboard is prohibited
 - Swift programming language
 - UIKit is used to implement the interface
-- The app looks correct for iPhone SE (1st gen.) and above

@@ -34,10 +34,6 @@ class RocketsViewController: UIViewController {
         view.backgroundColor = .white
         
         getRockets()
-    }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         
         setupView()
         setConstraints()
@@ -78,7 +74,7 @@ extension RocketsViewController {
                 strongSelf.rockets = rockets
                 
                 DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
+                    strongSelf.collectionView.reloadData()
                 }
             case .failure(let error):
                 strongSelf.handleError(error: error)
@@ -101,6 +97,7 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destination = RocketDetailViewController()
+        destination.rocket = rockets[indexPath.row]
         navigationController?.pushViewController(destination, animated: true)
         
     }

@@ -23,7 +23,7 @@ class RocketsCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    
+    lazy var mainStackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 30)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -37,10 +37,42 @@ class RocketsCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
+        contentView.addSubview(imageView)
+        contentView.addSubview(titleLabel)
         
+        for i in 0..<3 {
+            /*
+            let mainLabel = UILabel(text: "Title")
+            let subtitleLabel = UILabel(text: "Subtitle", color: .slateGray)
+            /*
+            let mainLabel = UILabel()
+            mainLabel.text = "Title"
+            let subtitleLabel = UILabel()
+            subtitleLabel.text = "Subtitle"
+            subtitleLabel.textColor = .slateGray
+            */
+            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel])
+            */
+            let subStackView = UILabel(text: "Hello, World!", color: .slateGray)
+            mainStackView.addArrangedSubview(subStackView)
+        }
+        
+        contentView.addSubview(mainStackView)
     }
     
     private func setConstraints() {
-        
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            imageView.heightAnchor.constraint(equalToConstant: 240),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20), // если делаешь 20, то ошибка исчезает, но на экране так же пусто
+            mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
+        ])
     }
 }

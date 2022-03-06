@@ -9,6 +9,8 @@ import UIKit
 
 class RocketDetailViewController: UIViewController {
     
+    public var rocket: Rocket?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
