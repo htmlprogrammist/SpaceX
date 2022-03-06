@@ -16,6 +16,13 @@
 		F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A9E27D4D747008806C7 /* LaunchpadsViewController.swift */; };
 		F0711AA327D4D77B008806C7 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AA227D4D77B008806C7 /* NetworkManager.swift */; };
 		F0711AA527D4D78D008806C7 /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AA427D4D78D008806C7 /* Rocket.swift */; };
+		F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AA927D4D85C008806C7 /* AlertError.swift */; };
+		F0711AAC27D4D875008806C7 /* RocketsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AAB27D4D875008806C7 /* RocketsCollectionViewCell.swift */; };
+		F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AAF27D4D8E7008806C7 /* UIViewController.swift */; };
+		F0711AB227D4D930008806C7 /* RocketDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB127D4D930008806C7 /* RocketDetailViewController.swift */; };
+		F0711AB427D4D94A008806C7 /* RocketWikiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB327D4D94A008806C7 /* RocketWikiViewController.swift */; };
+		F0711AB627D4D968008806C7 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */; };
+		F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +38,13 @@
 		F0711A9E27D4D747008806C7 /* LaunchpadsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadsViewController.swift; sourceTree = "<group>"; };
 		F0711AA227D4D77B008806C7 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		F0711AA427D4D78D008806C7 /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
+		F0711AA927D4D85C008806C7 /* AlertError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertError.swift; sourceTree = "<group>"; };
+		F0711AAB27D4D875008806C7 /* RocketsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0711AAF27D4D8E7008806C7 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		F0711AB127D4D930008806C7 /* RocketDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketDetailViewController.swift; sourceTree = "<group>"; };
+		F0711AB327D4D94A008806C7 /* RocketWikiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketWikiViewController.swift; sourceTree = "<group>"; };
+		F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
+		F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,7 +80,9 @@
 			children = (
 				F0711A9227D4D671008806C7 /* Application */,
 				F0711A9427D4D6C2008806C7 /* Controllers */,
+				F0711AA627D4D83E008806C7 /* Views */,
 				F0711AA027D4D762008806C7 /* Services */,
+				F0711AAD27D4D8D7008806C7 /* Extensions */,
 				F0711AA127D4D768008806C7 /* Models */,
 				F0711A9327D4D67B008806C7 /* Resources */,
 			);
@@ -106,6 +122,8 @@
 			isa = PBXGroup;
 			children = (
 				F0711A9A27D4D710008806C7 /* RocketsViewController.swift */,
+				F0711AB127D4D930008806C7 /* RocketDetailViewController.swift */,
+				F0711AB327D4D94A008806C7 /* RocketWikiViewController.swift */,
 			);
 			path = Rockets;
 			sourceTree = "<group>";
@@ -114,6 +132,7 @@
 			isa = PBXGroup;
 			children = (
 				F0711A9C27D4D729008806C7 /* LaunchesViewController.swift */,
+				F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */,
 			);
 			path = Launches;
 			sourceTree = "<group>";
@@ -122,6 +141,7 @@
 			isa = PBXGroup;
 			children = (
 				F0711A9E27D4D747008806C7 /* LaunchpadsViewController.swift */,
+				F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */,
 			);
 			path = Launchpads;
 			sourceTree = "<group>";
@@ -140,6 +160,47 @@
 				F0711AA427D4D78D008806C7 /* Rocket.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		F0711AA627D4D83E008806C7 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F0711AA827D4D853008806C7 /* Alert */,
+				F0711AA727D4D84F008806C7 /* Cell */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F0711AA727D4D84F008806C7 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				F0711AAB27D4D875008806C7 /* RocketsCollectionViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		F0711AA827D4D853008806C7 /* Alert */ = {
+			isa = PBXGroup;
+			children = (
+				F0711AA927D4D85C008806C7 /* AlertError.swift */,
+			);
+			path = Alert;
+			sourceTree = "<group>";
+		};
+		F0711AAD27D4D8D7008806C7 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F0711AAE27D4D8DD008806C7 /* UIKit */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		F0711AAE27D4D8DD008806C7 /* UIKit */ = {
+			isa = PBXGroup;
+			children = (
+				F0711AAF27D4D8E7008806C7 /* UIViewController.swift */,
+			);
+			path = UIKit;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,11 +273,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F0711AB427D4D94A008806C7 /* RocketWikiViewController.swift in Sources */,
 				F0711AA527D4D78D008806C7 /* Rocket.swift in Sources */,
+				F0711AB627D4D968008806C7 /* LaunchDetailViewController.swift in Sources */,
+				F0711AB227D4D930008806C7 /* RocketDetailViewController.swift in Sources */,
+				F0711AAC27D4D875008806C7 /* RocketsCollectionViewCell.swift in Sources */,
 				F0711AA327D4D77B008806C7 /* NetworkManager.swift in Sources */,
 				F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */,
+				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
+				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
+				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
 			);
