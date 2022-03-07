@@ -13,6 +13,10 @@ class MainTabBarController: UITabBarController {
         super.viewDidLoad()
         
         createTabs()
+        
+        tabBar.barTintColor = .glaucous
+        tabBar.unselectedItemTintColor = .champagne
+        tabBar.tintColor = .coral
     }
     
     func createTabs() {
@@ -27,6 +31,8 @@ class MainTabBarController: UITabBarController {
         
         let navController = UINavigationController(rootViewController: viewController)
         navController.tabBarItem = UITabBarItem(title: itemName, image: UIImage(named: itemImage), tag: 0)
+        navController.navigationBar.barTintColor = .glaucous
+        navController.navigationBar.tintColor = .coral
         return navController
     }
 }

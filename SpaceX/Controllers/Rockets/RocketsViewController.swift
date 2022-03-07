@@ -42,16 +42,8 @@ class RocketsViewController: UIViewController {
     }
     
     private func setupView() {
-        // Change color of navigation elements
-        navigationController?.navigationBar.barTintColor = .glaucous
-        navigationController?.navigationBar.tintColor = .coral
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowUpAndDown"), style: .plain, target: self, action: #selector(sortButtonTapped))
         
-        tabBarController?.tabBar.barTintColor = .glaucous
-        tabBarController?.tabBar.unselectedItemTintColor = .champagne
-        tabBarController?.tabBar.tintColor = .coral
-        
-        // View
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: rocketsCell)
