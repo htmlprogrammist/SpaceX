@@ -28,7 +28,7 @@ enum NetworkManagerError: Error {
     case parsingJSONError
 }
 
-class NetworkManager {
+final class NetworkManager {
     
     public let session: URLSession
     private let decoder = JSONDecoder()

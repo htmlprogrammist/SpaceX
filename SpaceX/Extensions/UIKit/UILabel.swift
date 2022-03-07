@@ -9,9 +9,10 @@ import UIKit
 
 extension UILabel {
     
-    convenience init(text: String, color: UIColor = .black) {
+    convenience init(text: String, size: CGFloat = 14, weight: UIFont.Weight = .regular, color: UIColor = .black) {
         self.init()
         self.text = text
+        self.font = UIFont.systemFont(ofSize: size, weight: weight)
         self.textColor = color
         self.translatesAutoresizingMaskIntoConstraints = false
     }

@@ -11,19 +11,24 @@ class RocketsCollectionViewCell: UICollectionViewCell {
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
+        imageView.image = UIImage(named: "testRocket")
         return imageView
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel()
+        let label = UILabel(text: "Title")
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
-    lazy var mainStackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 30)
+    lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 30)
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -41,8 +46,8 @@ class RocketsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         
         for i in 0..<3 {
-            let mainLabel = UILabel(text: "Title")
-            let subtitleLabel = UILabel(text: "Subtitle", color: .slateGray)
+            let mainLabel = UILabel(text: "Title", weight: .bold)
+            let subtitleLabel = UILabel(text: "Subtitle", weight: .bold, color: .slateGray)
             let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
             mainStackView.addArrangedSubview(subStackView)
         }

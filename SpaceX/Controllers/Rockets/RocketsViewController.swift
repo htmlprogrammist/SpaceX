@@ -25,6 +25,7 @@ class RocketsViewController: UIViewController {
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
+        collectionView.showsVerticalScrollIndicator = false
         collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
         return collectionView
     }()
@@ -53,7 +54,7 @@ class RocketsViewController: UIViewController {
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
 }
@@ -95,6 +96,7 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rocketsCell, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
+        cell.clipsToBounds = true
         return cell
     }
     
@@ -102,6 +104,5 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
         let destination = RocketDetailViewController()
         destination.rocket = rockets[indexPath.row]
         navigationController?.pushViewController(destination, animated: true)
-        
     }
 }
