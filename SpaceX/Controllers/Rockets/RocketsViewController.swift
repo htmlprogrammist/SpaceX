@@ -26,7 +26,7 @@ class RocketsViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = UIColor(white: 1, alpha: 0)
+        collectionView.backgroundColor = .transparent
         return collectionView
     }()
     
@@ -42,6 +42,16 @@ class RocketsViewController: UIViewController {
     }
     
     private func setupView() {
+        // Change color of navigation elements
+        navigationController?.navigationBar.barTintColor = .glaucous
+        navigationController?.navigationBar.tintColor = .coral
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowUpAndDown"), style: .plain, target: self, action: #selector(sortButtonTapped))
+        
+        tabBarController?.tabBar.barTintColor = .glaucous
+        tabBarController?.tabBar.unselectedItemTintColor = .champagne
+        tabBarController?.tabBar.tintColor = .coral
+        
+        // View
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: rocketsCell)
@@ -56,6 +66,10 @@ class RocketsViewController: UIViewController {
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
+    }
+    
+    @objc private func sortButtonTapped() {
+        print("Tapped")
     }
 }
 
