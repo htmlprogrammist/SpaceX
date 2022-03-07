@@ -9,12 +9,18 @@ import UIKit
 
 class LaunchesViewController: UIViewController {
     
-    // https://github.com/r-spacex/SpaceX-API/tree/master/docs/launches/v5
-    lazy var networkManager: NetworkManager = {
-        let configuration = URLSessionConfiguration.default
-        let networkManager = NetworkManager(session: URLSession(configuration: configuration))
-        return networkManager
-    }()
+    private var networkManager: NetworkManagerProtocol
+    
+    
+    
+    init(networkManager: NetworkManagerProtocol) {
+        self.networkManager = networkManager
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

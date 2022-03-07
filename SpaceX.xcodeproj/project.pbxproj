@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F00223AA27D6941D00F062AD /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */; };
 		F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A7D27D4D553008806C7 /* AppDelegate.swift */; };
 		F0711A8727D4D555008806C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8627D4D555008806C7 /* Assets.xcassets */; };
 		F0711A8A27D4D555008806C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8827D4D555008806C7 /* LaunchScreen.storyboard */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
 		F0711A7A27D4D553008806C7 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0711A7D27D4D553008806C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0711A8627D4D555008806C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 		F0455E8127D6647200E3AD2D /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
+				F00223AA27D6941D00F062AD /* NetworkManagerProtocol.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
