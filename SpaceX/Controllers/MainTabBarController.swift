@@ -26,9 +26,12 @@ class MainTabBarController: UITabBarController {
     }
     
     func createTabs() {
-        let rocketsViewController = createNavController(viewController: RocketsViewController(networkManager: networkManager), itemName: "Rockets", itemImage: "rocket")
-        let launchesViewController = createNavController(viewController: LaunchesViewController(networkManager: networkManager), itemName: "Launches", itemImage: "adjustment")
-        let launchpadsViewController = createNavController(viewController: LaunchpadsViewController(networkManager: networkManager), itemName: "Launchpads", itemImage: "lego")
+        let rocketsViewController = createNavController(viewController: RocketsViewController(networkManager: networkManager),
+                                                        itemName: "Rockets", itemImage: "rocket")
+        let launchesViewController = createNavController(viewController: LaunchesViewController(networkManager: networkManager),
+                                                        itemName: "Launches", itemImage: "adjustment")
+        let launchpadsViewController = createNavController(viewController: LaunchpadsViewController(networkManager: networkManager),
+                                                        itemName: "Launchpads", itemImage: "lego")
         
         viewControllers = [rocketsViewController, launchesViewController, launchpadsViewController]
     }

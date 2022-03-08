@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F00223AA27D6941D00F062AD /* NetworkManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */; };
+		F00223AC27D69D7D00F062AD /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00223AB27D69D7D00F062AD /* UICollectionView.swift */; };
+		F00923A627D75C8700F36153 /* RocketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00923A527D75C8700F36153 /* RocketCardView.swift */; };
 		F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A7D27D4D553008806C7 /* AppDelegate.swift */; };
 		F0711A8727D4D555008806C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8627D4D555008806C7 /* Assets.xcassets */; };
 		F0711A8A27D4D555008806C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8827D4D555008806C7 /* LaunchScreen.storyboard */; };
@@ -31,7 +32,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerProtocol.swift; sourceTree = "<group>"; };
+		F00223AB27D69D7D00F062AD /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
+		F00923A527D75C8700F36153 /* RocketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCardView.swift; sourceTree = "<group>"; };
 		F0711A7A27D4D553008806C7 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0711A7D27D4D553008806C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0711A8627D4D555008806C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -68,14 +70,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		F0455E8127D6647200E3AD2D /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				F00223A927D6941D00F062AD /* NetworkManagerProtocol.swift */,
-			);
-			path = Protocols;
-			sourceTree = "<group>";
-		};
 		F0711A7127D4D553008806C7 = {
 			isa = PBXGroup;
 			children = (
@@ -100,7 +94,6 @@
 				F0711A9427D4D6C2008806C7 /* Controllers */,
 				F0711AA627D4D83E008806C7 /* Views */,
 				F0711AA027D4D762008806C7 /* Services */,
-				F0455E8127D6647200E3AD2D /* Protocols */,
 				F0711AAD27D4D8D7008806C7 /* Extensions */,
 				F0711AA127D4D768008806C7 /* Models */,
 				F0711A9327D4D67B008806C7 /* Resources */,
@@ -186,6 +179,7 @@
 			children = (
 				F0711AA727D4D84F008806C7 /* Cell */,
 				F0711AA927D4D85C008806C7 /* AlertError.swift */,
+				F00923A527D75C8700F36153 /* RocketCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -214,6 +208,7 @@
 				F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */,
 				F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */,
 				F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */,
+				F00223AB27D69D7D00F062AD /* UICollectionView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -298,12 +293,13 @@
 				F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */,
 				F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */,
 				F0711AA327D4D77B008806C7 /* NetworkManager.swift in Sources */,
+				F00223AC27D69D7D00F062AD /* UICollectionView.swift in Sources */,
 				F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */,
 				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
+				F00923A627D75C8700F36153 /* RocketCardView.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
-				F00223AA27D6941D00F062AD /* NetworkManagerProtocol.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,

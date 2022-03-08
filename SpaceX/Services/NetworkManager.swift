@@ -7,6 +7,11 @@
 
 import Foundation
 
+protocol NetworkManagerProtocol {
+    var session: URLSession { get set }
+    func perform<Model: Codable>(request: NetworkRequest, completion: @escaping (Result<Model, NetworkManagerError>) -> Void)
+}
+
 struct NetworkRequest {
     var urlString: String
     var method: HTTPMethod = .get
