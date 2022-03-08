@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F00223AC27D69D7D00F062AD /* UICollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00223AB27D69D7D00F062AD /* UICollectionView.swift */; };
 		F00923A627D75C8700F36153 /* RocketCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F00923A527D75C8700F36153 /* RocketCardView.swift */; };
 		F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A7D27D4D553008806C7 /* AppDelegate.swift */; };
 		F0711A8727D4D555008806C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8627D4D555008806C7 /* Assets.xcassets */; };
@@ -32,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F00223AB27D69D7D00F062AD /* UICollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionView.swift; sourceTree = "<group>"; };
 		F00923A527D75C8700F36153 /* RocketCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketCardView.swift; sourceTree = "<group>"; };
 		F0711A7A27D4D553008806C7 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0711A7D27D4D553008806C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -208,7 +206,6 @@
 				F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */,
 				F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */,
 				F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */,
-				F00223AB27D69D7D00F062AD /* UICollectionView.swift */,
 			);
 			path = UIKit;
 			sourceTree = "<group>";
@@ -293,7 +290,6 @@
 				F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */,
 				F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */,
 				F0711AA327D4D77B008806C7 /* NetworkManager.swift in Sources */,
-				F00223AC27D69D7D00F062AD /* UICollectionView.swift in Sources */,
 				F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */,
 				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
