@@ -10,13 +10,17 @@ import UIKit
 class RocketsViewController: UIViewController {
     
     private var rockets = [Rocket]()
-    private let rocketsCell = "rocketsCell"
     private var networkManager: NetworkManagerProtocol
+    private let collectionHeader = "collectionHeader"
+    private let collectionFooter = "collectionFooter"
     
+//    lazy var collectionView = UICollectionView(heightOfItem: 360)
     lazy var collectionView: UICollectionView = {
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 40, height: 360)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - (18 * 2), height: 360)
         layout.scrollDirection = .vertical
+        layout.minimumLineSpacing = 30
+        layout.minimumInteritemSpacing = 30
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         collectionView.showsVerticalScrollIndicator = false
@@ -49,14 +53,16 @@ class RocketsViewController: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: rocketsCell)
+        collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: RocketsCollectionViewCell.identifier)
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: collectionHeader)
+        collectionView.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: collectionFooter)
         
         view.addSubview(collectionView)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 30),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -18),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
@@ -102,7 +108,7 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rocketsCell, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
         cell.clipsToBounds = true
@@ -112,6 +118,31 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destination = RocketDetailViewController()
         destination.rocket = rockets[indexPath.row]
+        destination.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(destination, animated: true)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: collectionHeader, for: indexPath)
+//        header.backgroundColor = .green
+//        return header
+        
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: collectionHeader, for: indexPath)
+            header.backgroundColor = UIColor.blue
+            return header
+            
+        case UICollectionView.elementKindSectionFooter:
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: collectionFooter, for: indexPath)
+            footer.backgroundColor = UIColor.green
+            return footer
+        default:
+            fatalError("Unexpected element in \"viewForSupplementaryElementOfKind\" in RocketCollectionView")
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection: Int) -> CGSize {
+        return CGSize(width: view.frame.size.width, height: 200)
     }
 }
