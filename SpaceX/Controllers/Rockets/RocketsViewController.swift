@@ -107,6 +107,10 @@ extension RocketsViewController: UICollectionViewDelegate, UICollectionViewDataS
         return rockets.count
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        UIEdgeInsets(top: 30, left: 0, bottom: 30, right: 0)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { fatalError("Can not create CollectionViewCell at RocketsViewController") }
         cell.backgroundColor = .white
