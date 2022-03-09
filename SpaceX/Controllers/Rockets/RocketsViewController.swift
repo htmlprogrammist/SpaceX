@@ -34,7 +34,26 @@ final class RocketsViewController: UICollectionViewController {
     }
     
     @objc private func sortButtonTapped() {
-        print("Tapped")
+        let alertController = UIAlertController(title: "Choose your option", message: nil, preferredStyle: .actionSheet)
+        alertController.view.tintColor = .coral
+        
+        let launchDateAlertAction = UIAlertAction(title: "First launch", style: .default) { _ in
+            
+        }
+        let launchCostAlertAction = UIAlertAction(title: "Launch cost", style: .default) { _ in
+            
+        }
+        let successRateAlertAction = UIAlertAction(title: "Success rate", style: .default) { _ in
+            
+        }
+        let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        cancelAlertAction.setValue(UIColor(red: 235/255, green: 87/255, blue: 87/255, alpha: 1), forKey: "titleTextColor")
+        
+        alertController.addAction(launchDateAlertAction)
+        alertController.addAction(launchCostAlertAction)
+        alertController.addAction(successRateAlertAction)
+        alertController.addAction(cancelAlertAction)
+        present(alertController, animated: true, completion: nil)
     }
     
     private func getRockets() {

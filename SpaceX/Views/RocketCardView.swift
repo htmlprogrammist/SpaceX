@@ -26,7 +26,7 @@ final class RocketCardView: UIView {
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel(text: "")
+        let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -64,9 +64,7 @@ final class RocketCardView: UIView {
               let success = rocket?.successRatePct
         else { return }
         
-//        imageView.image = rocket?.flickrImages[0..<rocket?.flickrImages.count]
-        let randomIndex = Int.random(in: 0..<flickrImages.count)
-        imageView.loadImage(for: flickrImages[randomIndex])
+        imageView.loadImage(for: flickrImages.first ?? "")
         titleLabel.text = name
         let formattedDateOfFirstFlight = formatDate(input: firstFlight)
         

@@ -30,6 +30,11 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
     private func setupViewAndConstraints() {
         contentView.addSubview(rocketCard)
         rocketCard.translatesAutoresizingMaskIntoConstraints = false
+        // add shadows
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1.0
         
         NSLayoutConstraint.activate([
             rocketCard.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
