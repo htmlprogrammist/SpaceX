@@ -7,19 +7,24 @@
 
 import UIKit
 
-class RocketsCollectionViewCell: UICollectionViewCell {
+final class RocketsCollectionViewCell: UICollectionViewCell {
     
+    public var rocket: Rocket?
     static let identifier = "rocketsCell"
-    lazy var rocketCard = RocketCardView(frame: .zero)
+    private lazy var rocketCard = RocketCardView(rocket: rocket)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        setupViewAndConstraints()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        setupViewAndConstraints()
     }
     
     private func setupViewAndConstraints() {

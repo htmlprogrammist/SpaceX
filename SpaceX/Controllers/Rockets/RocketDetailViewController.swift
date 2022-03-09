@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RocketDetailViewController: UIViewController {
+final class RocketDetailViewController: UIViewController {
     
     public var rocket: Rocket?
     

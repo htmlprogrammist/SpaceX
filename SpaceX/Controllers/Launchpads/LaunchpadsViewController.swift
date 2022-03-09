@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchpadsViewController: UIViewController {
+final class LaunchpadsViewController: UIViewController {
     
     private var networkManager: NetworkManagerProtocol
     

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchesViewController: UIViewController {
+final class LaunchesViewController: UIViewController {
     
     private var networkManager: NetworkManagerProtocol
     

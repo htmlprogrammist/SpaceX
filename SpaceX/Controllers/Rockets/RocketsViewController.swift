@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RocketsViewController: UICollectionViewController {
+final class RocketsViewController: UICollectionViewController {
     
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
@@ -69,9 +69,9 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
+        cell.rocket = rockets[indexPath.row]
         cell.clipsToBounds = true
         return cell
     }
@@ -92,8 +92,6 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = view.frame.size.width - 2 * 18
-        let height = width / (377 / 360)
-        return CGSize(width: width, height: 360)
+        return CGSize(width: view.frame.size.width - 2 * 18, height: 360)
     }
 }

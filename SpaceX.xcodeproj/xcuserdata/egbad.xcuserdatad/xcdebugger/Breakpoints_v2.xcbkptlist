@@ -7,32 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "2C22CAFC-1E07-405C-BBA7-81CD2736740A"
+            uuid = "F5B0B912-0E22-45A8-9F92-9C3892A46F2B"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "SpaceX/Controllers/Rockets/RocketsViewController.swift"
+            filePath = "SpaceX/Views/RocketCardView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
-            landmarkName = "getRockets()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AF9AB4A2-23FE-4A12-9901-E355E6B4D59A"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "SpaceX/Controllers/Rockets/RocketsViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
-            landmarkName = "getRockets()"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
+            landmarkName = "formatDate(input:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

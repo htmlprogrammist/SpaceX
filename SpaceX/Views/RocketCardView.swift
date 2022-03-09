@@ -7,7 +7,9 @@
 
 import UIKit
 
-class RocketCardView: UIView {
+final class RocketCardView: UIView {
+    
+    public var rocket: Rocket?
     
     private lazy var contentView: UIView = {
         let view = UIView()
@@ -18,13 +20,13 @@ class RocketCardView: UIView {
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "testRocket")
         return imageView
     }()
     
     lazy var titleLabel: UILabel = {
-        let label = UILabel(text: "Title")
+        let label = UILabel(text: "")
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -36,8 +38,11 @@ class RocketCardView: UIView {
         return stackView
     }()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init(rocket: Rocket?) {
+        if let rocket = rocket {
+            self.rocket = rocket
+        }
+        super.init(frame: .zero)
         
         setupView()
         setConstraints()
@@ -51,9 +56,26 @@ class RocketCardView: UIView {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         
+        // unwrapping all needed properties
+        guard let flickrImages = rocket?.flickrImages,
+              let name = rocket?.name,
+              let firstFlight = rocket?.firstFlight,
+              let costPerLaunch = rocket?.costPerLaunch,
+              let success = rocket?.successRatePct
+        else { return }
+        
+//        imageView.image = rocket?.flickrImages[0..<rocket?.flickrImages.count]
+        let randomIndex = Int.random(in: 0..<flickrImages.count)
+        imageView.loadImage(for: flickrImages[randomIndex])
+        titleLabel.text = name
+        let formattedDateOfFirstFlight = formatDate(input: firstFlight)
+        
+        let titleData = ["First launch", "Launch cost", "Success"]
+        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(costPerLaunch)$", "\(success)%"]
+        
         for i in 0..<3 {
-            let mainLabel = UILabel(text: "Title", weight: .bold)
-            let subtitleLabel = UILabel(text: "Subtitle", weight: .bold, color: .slateGray)
+            let mainLabel = UILabel(text: titleData[i], weight: .bold)
+            let subtitleLabel = UILabel(text: subtitleData[i], weight: .bold, color: .slateGray)
             let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
             mainStackView.addArrangedSubview(subStackView)
         }
@@ -81,5 +103,17 @@ class RocketCardView: UIView {
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
         ])
+    }
+    
+    private func formatDate(input: String) -> String {
+        let parseDateFormatter = DateFormatter()
+        parseDateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = parseDateFormatter.date(from: input) else { return "January 1, 1970" }
+        
+        let convertDateFormatter = DateFormatter()
+        convertDateFormatter.locale = Locale(identifier: "en_US")
+        convertDateFormatter.dateStyle = .long
+        convertDateFormatter.timeStyle = .none
+        return convertDateFormatter.string(from: date)
     }
 }

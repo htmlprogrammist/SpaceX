@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchpadDetailViewController: UIViewController {
+final class LaunchpadDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
