@@ -43,13 +43,16 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func configure(data: RocketCellData) {
-        imageView.loadImage(for: data.imageURL)
-        titleLabel.text = data.name
-        let formattedDateOfFirstFlight = formatDate(input: parseDate(input: data.flightDate))
+    public func configure(rocket: Rocket) {
+        imageView.loadImage(for: rocket.flickrImages?.first ?? "")
+        titleLabel.text = rocket.name
+        
+        // getting String from Rocket, parsing it with current dateFormat and then format date to normal view
+        // Types: Unformatted String -> Date -> Formatted String
+        let formattedDateOfFirstFlight = (rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate()
         
         let titleData = ["First launch", "Launch cost", "Success"]
-        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(data.costPerLaunch)$", "\(data.success)%"]
+        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%"]
         
         for subview in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(subview)
@@ -83,23 +86,5 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
         ])
-    }
-}
-
-extension RocketsCollectionViewCell {
-    
-    private func parseDate(input: String) -> Date {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        guard let date = dateFormatter.date(from: input) else { return Date() }
-        return date
-    }
-    
-    private func formatDate(input: Date) -> String {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale(identifier: "en_US")
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .none
-        return dateFormatter.string(from: input)
     }
 }
