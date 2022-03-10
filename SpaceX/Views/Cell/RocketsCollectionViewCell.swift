@@ -9,8 +9,8 @@ import UIKit
 
 final class RocketsCollectionViewCell: UICollectionViewCell {
     
-    public var rocket: Rocket?
     static let identifier = "rocketsCell"
+    public var rocket: Rocket?
     private lazy var rocketCard = RocketCardView(rocket: rocket)
     
     override init(frame: CGRect) {

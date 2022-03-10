@@ -30,7 +30,7 @@ final class RocketsViewController: UICollectionViewController {
         collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: RocketsCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         
-        getRockets()
+        fetchData()
     }
     
     @objc private func sortButtonTapped() {
@@ -40,11 +40,21 @@ final class RocketsViewController: UICollectionViewController {
         let launchDateAlertAction = UIAlertAction(title: "First launch", style: .default) { _ in
             
         }
-        let launchCostAlertAction = UIAlertAction(title: "Launch cost", style: .default) { _ in
+        let launchCostAlertAction = UIAlertAction(title: "Launch cost", style: .default) { [weak self] _ in
+            print("Before:", self?.rockets[0].name!, self?.rockets[1].name!, self?.rockets[2].name!, self?.rockets[3].name!)
             
+            
+            self?.rockets.sort(by: { ($0.costPerLaunch ?? 0) < ($1.costPerLaunch ?? 1) })
+            
+            self?.collectionView.reloadData()
+            
+            
+            print("After: ", self?.rockets[0].name!, self?.rockets[1].name!, self?.rockets[2].name!, self?.rockets[3].name!)
         }
-        let successRateAlertAction = UIAlertAction(title: "Success rate", style: .default) { _ in
+        let successRateAlertAction = UIAlertAction(title: "Success rate", style: .default) { [weak self] _ in
+            self?.rockets.sort(by: { ($0.successRatePct ?? 0) < ($1.successRatePct ?? 1) })
             
+            self?.collectionView.reloadData()
         }
         let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         cancelAlertAction.setValue(UIColor(red: 235/255, green: 87/255, blue: 87/255, alpha: 1), forKey: "titleTextColor")
@@ -56,7 +66,7 @@ final class RocketsViewController: UICollectionViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    private func getRockets() {
+    private func fetchData() {
         let request = NetworkRequest(urlString: "https://api.spacexdata.com/v4/rockets")
         networkManager.perform(request: request) { [weak self] (result: Result<[Rocket], NetworkManagerError>) in
             
@@ -90,7 +100,9 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
+        print("Cell: ", rockets[0].name!, rockets[1].name!, rockets[2].name!, rockets[3].name!)
         cell.rocket = rockets[indexPath.row]
+//        cell.rocketCard.rocket = rockets[indexPath.row]
         cell.clipsToBounds = true
         return cell
     }
