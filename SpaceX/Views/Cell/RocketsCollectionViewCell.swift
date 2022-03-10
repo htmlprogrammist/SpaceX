@@ -11,6 +11,9 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "rocketsCell"
     
+    private let titleData = ["First launch", "Launch cost", "Success"]
+    private var subtitleData = [String]()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -47,12 +50,10 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         imageView.loadImage(for: rocket.flickrImages?.first ?? "")
         titleLabel.text = rocket.name
         
-        // getting String from Rocket, parsing it with current dateFormat and then format date to normal view
-        // Types: Unformatted String -> Date -> Formatted String
+        // getting String from Rocket, parsing it with entered dateFormat and then format date to normal view
+        // Types: (Unformatted) String -> Date -> (Formatted) String
         let formattedDateOfFirstFlight = (rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate()
-        
-        let titleData = ["First launch", "Launch cost", "Success"]
-        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%"]
+        subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%"]
         
         for subview in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(subview)
@@ -70,6 +71,12 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(mainStackView)
+        
+        // Shadows
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
+        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1.0
     }
     
     private func setConstraints() {
