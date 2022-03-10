@@ -10,7 +10,6 @@ import UIKit
 final class RocketsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "rocketsCell"
-    public var rocket: Rocket?
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
@@ -44,26 +43,30 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    public func configure(data: RocketCellData) {
+        imageView.loadImage(for: data.imageURL)
+        titleLabel.text = data.name
+        let formattedDateOfFirstFlight = formatDate(input: parseDate(input: data.flightDate))
+        
+        let titleData = ["First launch", "Launch cost", "Success"]
+        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(data.costPerLaunch)$", "\(data.success)%"]
+        
+        for subview in mainStackView.arrangedSubviews {
+            mainStackView.removeArrangedSubview(subview)
+            subview.removeFromSuperview()
+        }
+        for i in 0..<3 {
+            let mainLabel = UILabel(text: titleData[i], weight: .bold)
+            let subtitleLabel = UILabel(text: subtitleData[i], weight: .bold, color: .slateGray)
+            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
+            mainStackView.addArrangedSubview(subStackView)
+        }
+    }
+    
     private func setupView() {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(mainStackView)
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.01, execute: { [self] in
-            imageView.loadImage(for: rocket?.flickrImages?.first ?? "")
-            titleLabel.text = rocket?.name
-            let formattedDateOfFirstFlight = formatDate(input: parseDate(input: rocket?.firstFlight ?? "1970-01-01"))
-            
-            let titleData = ["First launch", "Launch cost", "Success"]
-            let subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket?.costPerLaunch ?? 0)$", "\(rocket?.successRatePct ?? 0)%"]
-            
-            for i in 0..<3 {
-                let mainLabel = UILabel(text: titleData[i], weight: .bold)
-                let subtitleLabel = UILabel(text: subtitleData[i], weight: .bold, color: .slateGray)
-                let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
-                mainStackView.addArrangedSubview(subStackView)
-            }
-        })
     }
     
     private func setConstraints() {

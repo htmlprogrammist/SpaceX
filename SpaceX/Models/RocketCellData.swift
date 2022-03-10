@@ -6,8 +6,9 @@
 //
 
 struct RocketCellData {
-    let name: String
     let imageURL: String
+    let name: String
     let flightDate: String
-    let 
+    let costPerLaunch: String
+    let success: String
 }

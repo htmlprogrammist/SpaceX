@@ -100,7 +100,12 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
-        cell.rocket = rockets[indexPath.row]
+        let rocket = rockets[indexPath.row]
+        cell.configure(data: RocketCellData(imageURL: rocket.flickrImages?.first ?? "",
+                                            name: rocket.name ?? "",
+                                            flightDate: rocket.firstFlight ?? "1970-01-01",
+                                            costPerLaunch: String(rocket.costPerLaunch ?? 0),
+                                            success: String(rocket.successRatePct ?? 0)))
         cell.clipsToBounds = true
         return cell
     }
