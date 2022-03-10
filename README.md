@@ -13,6 +13,7 @@ In this project, I demonstrated the knowledge of:
 2. Networking, URLSession
 3. Multithreading/Concurrency
 4. Animations
+5. NSCache
 6. MapKit, WebKit
 7. Unit tests
 
