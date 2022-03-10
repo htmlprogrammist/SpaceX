@@ -37,23 +37,16 @@ final class RocketsViewController: UICollectionViewController {
         let alertController = UIAlertController(title: "Choose your option", message: nil, preferredStyle: .actionSheet)
         alertController.view.tintColor = .coral
         
-        let launchDateAlertAction = UIAlertAction(title: "First launch", style: .default) { _ in
-            
+        let launchDateAlertAction = UIAlertAction(title: "First launch", style: .default) { [weak self] _ in
+            self?.rockets.sort(by: { $0.firstFlight?.parseDate(dateFormat: "yyyy-MM-dd") ?? Date() < $1.firstFlight?.parseDate(dateFormat: "yyyy-MM-dd") ?? Date() })
+            self?.collectionView.reloadData()
         }
         let launchCostAlertAction = UIAlertAction(title: "Launch cost", style: .default) { [weak self] _ in
-            print("Before:", self?.rockets[0].name!, self?.rockets[1].name!, self?.rockets[2].name!, self?.rockets[3].name!)
-            
-            
             self?.rockets.sort(by: { ($0.costPerLaunch ?? 0) < ($1.costPerLaunch ?? 1) })
-            
             self?.collectionView.reloadData()
-            
-            
-            print("After: ", self?.rockets[0].name!, self?.rockets[1].name!, self?.rockets[2].name!, self?.rockets[3].name!)
         }
         let successRateAlertAction = UIAlertAction(title: "Success rate", style: .default) { [weak self] _ in
             self?.rockets.sort(by: { ($0.successRatePct ?? 0) < ($1.successRatePct ?? 1) })
-            
             self?.collectionView.reloadData()
         }
         let cancelAlertAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
@@ -100,9 +93,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
         cell.backgroundColor = .white
         cell.layer.cornerRadius = 20
-        print("Cell: ", rockets[0].name!, rockets[1].name!, rockets[2].name!, rockets[3].name!)
-        cell.rocket = rockets[indexPath.row]
-//        cell.rocketCard.rocket = rockets[indexPath.row]
+        cell.configure(rocket: rockets[indexPath.row])
         cell.clipsToBounds = true
         return cell
     }
