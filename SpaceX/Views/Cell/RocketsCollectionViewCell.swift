@@ -73,13 +73,18 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(mainStackView)
         
         // Shadows
-//        layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
-//        layer.shadowOffset = CGSize(width: 0.0, height: 2.0)
-//        layer.shadowRadius = 3.0
-//        layer.shadowOpacity = 1.0
-//        layer.backgroundColor = UIColor.clear.cgColor
-//        self.clipsToBounds = false
-//        self.layer.masksToBounds = false
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 1.0
+        contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.masksToBounds = true
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1.0
+        layer.cornerRadius = 20.0
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
     }
     
     private func setConstraints() {

@@ -91,20 +91,6 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
-        // Shadows
-        cell.contentView.layer.cornerRadius = 20
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.clear.cgColor
-        cell.contentView.layer.masksToBounds = true
-        cell.layer.backgroundColor = UIColor.white.cgColor
-        cell.layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
-        cell.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        cell.layer.shadowRadius = 3.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.cornerRadius = 20.0
-        cell.layer.masksToBounds = false
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
-        
         cell.configure(rocket: rockets[indexPath.row])
         cell.clipsToBounds = false
         return cell
