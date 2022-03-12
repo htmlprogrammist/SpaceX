@@ -62,7 +62,7 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         for i in 0..<3 {
             let mainLabel = UILabel(text: titleData[i], weight: .bold)
             let subtitleLabel = UILabel(text: subtitleData[i], weight: .bold, color: .slateGray)
-            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
+            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 2)
             mainStackView.addArrangedSubview(subStackView)
         }
     }
