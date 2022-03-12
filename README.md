@@ -30,3 +30,4 @@ The following endpoints will be of interest to us:
 - The use of Storyboard is prohibited
 - Swift programming language
 - UIKit is used to implement the interface
+- The app looks correct for iPhone SE (1st gen.) and above

@@ -30,7 +30,7 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 30)
+        let stackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 20)
         stackView.distribution = .fillProportionally
         return stackView
     }()
@@ -92,14 +92,15 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 240),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 30/47),
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
+//            mainStackView.topAnchor.constraint(lessThanOrEqualTo: titleLabel.bottomAnchor, constant: 20)
+            mainStackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -8)
         ])
     }
 }

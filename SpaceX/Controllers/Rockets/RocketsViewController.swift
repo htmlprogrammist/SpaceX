@@ -112,6 +112,8 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width - 2 * 18, height: 360)
+        let width = view.frame.size.width - 2 * 18
+        let height = width * 0.953
+        return CGSize(width: width, height: height)
     }
 }
