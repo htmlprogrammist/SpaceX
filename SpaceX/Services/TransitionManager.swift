@@ -7,12 +7,21 @@
 
 import UIKit
 
+enum PresentationType {
+    case presentation
+    case dismissal
+
+    var isPresenting: Bool {
+        return self == .presentation
+    }
+}
+
 class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
-    public let duration = 0.4
+    static let duration: TimeInterval = 1.25
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        duration
+        TransitionManager.duration
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
@@ -28,5 +37,11 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         
         containerView.addSubview(fromViewController.view)
         containerView.addSubview(toViewController.view)
+        
+        UIView.animate(withDuration: TransitionManager.duration, animations: {
+            
+        }) { (isFinished) in
+            transitionContext.completeTransition((isFinished))
+        }
     }
 }
