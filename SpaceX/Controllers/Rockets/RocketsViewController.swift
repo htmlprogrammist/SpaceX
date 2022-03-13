@@ -101,7 +101,10 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         let destination = RocketDetailViewController()
         destination.rocket = rockets[indexPath.row]
         destination.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(destination, animated: true)
+        destination.transitioningDelegate = transitionManager
+//        navigationController?.pushViewController(destination, animated: true)
+        destination.modalPresentationStyle = .overCurrentContext
+        present(destination, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

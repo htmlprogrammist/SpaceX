@@ -28,6 +28,7 @@ import UIKit
 class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
     public let duration = 0.4
+    var operation: UINavigationController.Operation = .push
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         duration
@@ -35,13 +36,81 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let fromViewController = transitionContext.viewController(forKey: .from),
-              let toViewController = transitionContext.viewController(forKey: .to)
+        guard let fromViewController = transitionContext.viewController(forKey: .from) as? TransitionManagerProtocol,
+              let toViewController = transitionContext.viewController(forKey: .to) as? TransitionManagerProtocol
         else {
             transitionContext.completeTransition(false)
             return
         }
+        
+        let containerView = transitionContext.containerView
+        
+        containerView.addSubview(fromViewController.view)
+        containerView.addSubview(toViewController.view)
+        
+        if operation == .pop {
+            containerView.bringSubviewToFront(fromViewController.view)
+        }
+        
+        toViewController.view.setNeedsLayout()
+        toViewController.view.layoutIfNeeded()
+        
+        //    fromViewController.view.setNeedsLayout()
+        //    fromViewController.view.layoutIfNeeded()
+        
+        let fromViews = fromViewController.viewsToAnimate()
+        let toViews = toViewController.viewsToAnimate()
+        
+        assert(fromViews.count == toViews.count, "Number of elements in fromViews and toViews have to be the same.")
+        
+        var intermediateViews = [UIView]()
+        
+        var toFrames = [CGRect]()
+        
+        for i in 0..<fromViews.count {
+            let fromView = fromViews[i]
+            let fromFrame = fromView.superview!.convert(fromView.frame, to: nil)
+            fromView.alpha = 0
+            
+            let intermediateView = fromViewController.copyForView(fromView)
+            intermediateView.frame = fromFrame
+            containerView.addSubview(intermediateView)
+            intermediateViews.append(intermediateView)
+            
+            let toView = toViews[i]
+            var toFrame: CGRect
+            if let tempToFrame = toViewController.frameForView?(toView) {
+                toFrame = tempToFrame
+            } else {
+                toFrame = toView.superview!.convert(toView.frame, to: nil)
+            }
+            toFrames.append(toFrame)
+            toView.alpha = 0
+        }
+        
+        if operation == .push {
+            toViewController.view.frame = fromViewController.view.frame.offsetBy(dx: fromViewController.view.frame.size.width, dy: 0)
+        }
+        
+        UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: [], animations: { () -> Void in
+            if self.operation == .pop {
+                fromViewController.view.frame = fromViewController.view.frame.offsetBy(dx: fromViewController.view.frame.size.width, dy: 0)
+            } else {
+                toViewController.view.frame = fromViewController.view.frame
+            }
+            
+            for i in 0..<intermediateViews.count {
+                let intermediateView = intermediateViews[i]
+                intermediateView.frame = toFrames[i]
+            }
+        }) { (_) -> Void in
+            for i in 0..<intermediateViews.count {
+                intermediateViews[i].removeFromSuperview()
+                
+                fromViews[i].alpha = 1
+                toViews[i].alpha = 1
+            }
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        }
     }
-    
-    
 }
