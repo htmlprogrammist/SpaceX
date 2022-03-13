@@ -102,8 +102,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         destination.rocket = rockets[indexPath.row]
         destination.hidesBottomBarWhenPushed = true
         destination.transitioningDelegate = transitionManager
-//        navigationController?.pushViewController(destination, animated: true)
-        destination.modalPresentationStyle = .overCurrentContext
+        destination.modalPresentationStyle = .fullScreen
         present(destination, animated: true, completion: nil)
     }
     
@@ -119,40 +118,5 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         let width = view.frame.size.width - 2 * 18
         let height = width * 0.953
         return CGSize(width: width, height: height)
-    }
-}
-
-extension RocketsViewController: TransitionManagerProtocol {
-    
-    func viewsToAnimate() -> [UIView] {
-//        let cell: UICollectionViewCell
-        if let indexPath = collectionView.indexPathsForSelectedItems {
-            guard let cell = collectionView.cellForItem(at: indexPath.first ?? IndexPath()) as? RocketsCollectionViewCell else {
-                RocketsCollectionViewCell()
-//                UICollectionViewCell()
-                return []
-            }
-            
-            return [cell.imageView, cell.titleLabel]
-        } else {
-            return []
-        }
-        
-//        guard let imageView = cell.imageView, let label = cell.titleLabel else {
-//            return []
-//        }
-//        return [imageView, label]
-    }
-    
-    func copyForView(_ subView: UIView) -> UIView {
-//        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!)!
-        guard let cell = collectionView.cellForItem(at: collectionView.indexPathsForSelectedItems?.first ?? IndexPath()) as? RocketsCollectionViewCell else { return UIView() }
-        if subView is UIImageView {
-            return UIImageView(image: cell.imageView.image)
-        } else {
-            let label = UILabel()
-            label.text = cell.titleLabel.text
-            return label
-        }
     }
 }
