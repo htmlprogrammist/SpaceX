@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F043309F27DE7AAB004C5DD9 /* NavigationControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F043309E27DE7AAB004C5DD9 /* NavigationControllerDelegate.swift */; };
 		F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A7D27D4D553008806C7 /* AppDelegate.swift */; };
 		F0711A8727D4D555008806C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8627D4D555008806C7 /* Assets.xcassets */; };
 		F0711A8A27D4D555008806C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8827D4D555008806C7 /* LaunchScreen.storyboard */; };
@@ -33,7 +32,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F043309E27DE7AAB004C5DD9 /* NavigationControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerDelegate.swift; sourceTree = "<group>"; };
 		F0711A7A27D4D553008806C7 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0711A7D27D4D553008806C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0711A8627D4D555008806C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -165,7 +163,6 @@
 			children = (
 				F0711AA227D4D77B008806C7 /* NetworkManager.swift */,
 				F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */,
-				F043309E27DE7AAB004C5DD9 /* NavigationControllerDelegate.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -305,7 +302,6 @@
 				F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
-				F043309F27DE7AAB004C5DD9 /* NavigationControllerDelegate.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
