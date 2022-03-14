@@ -65,10 +65,6 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
-    deinit {
-        print("View deinit.")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
