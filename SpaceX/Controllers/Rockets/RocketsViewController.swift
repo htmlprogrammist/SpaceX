@@ -104,8 +104,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
         selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
         
-        let destination = RocketDetailViewController()
-        destination.rocket = rockets[indexPath.row]
+        let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
         destination.transitioningDelegate = self
         destination.modalPresentationStyle = .fullScreen

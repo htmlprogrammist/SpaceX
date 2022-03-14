@@ -20,6 +20,7 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
     
     static let duration: TimeInterval = 1.25
     
+    // MARK: Можно тогда передавать enum по каждой анимации, чтобы указывать, какого типа контроллеры мне нужны
     private let type: PresentationType
     private let firstViewController: RocketsViewController
     private let secondViewController: RocketDetailViewController
@@ -54,6 +55,41 @@ class Animator: NSObject, UIViewControllerAnimatedTransitioning {
         
         containerView.addSubview(toView)
         
-        transitionContext.completeTransition(true)
+        guard let selectedCell = firstViewController.selectedCell,
+              let window = firstViewController.view.window ?? secondViewController.view.window,
+              let cellImageSnapshot = selectedCell.imageView.snapshotView(afterScreenUpdates: true),
+              let controllerImageSnapshot = secondViewController.imageView.snapshotView(afterScreenUpdates: true)
+        else {
+            transitionContext.completeTransition(true)
+            return
+        }
+        
+        let isPresenting = type.isPresenting
+        let imageViewSnapshot: UIView
+        
+        if isPresenting {
+            imageViewSnapshot = cellImageSnapshot
+        } else {
+            imageViewSnapshot = controllerImageSnapshot
+        }
+        
+        toView.alpha = 0
+        
+        [imageViewSnapshot].forEach { containerView.addSubview($0) }
+        
+        let controllerImageViewRect = secondViewController.imageView.convert(secondViewController.imageView.bounds, to: window)
+        [imageViewSnapshot].forEach {
+            $0.frame = isPresenting ? cellImageViewRect : controllerImageViewRect
+        }
+        
+        UIView.animateKeyframes(withDuration: Self.duration, delay: 0, options: .calculationModeCubic, animations: {
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: 1) {
+                imageViewSnapshot.frame = isPresenting ? controllerImageViewRect : self.cellImageViewRect
+            }
+        }, completion: { _ in
+            imageViewSnapshot.removeFromSuperview()
+            toView.alpha = 1
+            transitionContext.completeTransition(true)
+        })
     }
 }

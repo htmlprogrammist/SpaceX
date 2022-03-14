@@ -31,13 +31,21 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
         label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
+    }()
+    
+    lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "backButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .coral
+        button.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     let textView: UILabel = {
@@ -74,6 +82,7 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(imageView)
         scrollView.addSubview(titleLabel)
+        scrollView.addSubview(closeButton)
         scrollView.addSubview(textView)
         
         imageView.loadImage(for: rocket.flickrImages?.first ?? "")
@@ -95,10 +104,17 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
             titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
             
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            
             textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
             textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             textView.widthAnchor.constraint(equalToConstant: view.frame.size.width - 32)
         ])
+    }
+    
+    @objc func closeVC() {
+        dismiss(animated: true)
     }
 }
