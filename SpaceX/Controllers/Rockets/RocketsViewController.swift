@@ -11,7 +11,10 @@ final class RocketsViewController: UICollectionViewController {
     
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
-    private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект | Или можно свой протокол создать, так, наверное, лучше будет
+    var animator: Animator?
+    
+    var selectedCell: RocketsCollectionViewCell?
+    var selectedCellImageViewSnapshot: UIView?
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -98,10 +101,13 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
+        selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
+        
         let destination = RocketDetailViewController()
         destination.rocket = rockets[indexPath.row]
         destination.hidesBottomBarWhenPushed = true
-        destination.transitioningDelegate = transitionManager
+        destination.transitioningDelegate = self
         destination.modalPresentationStyle = .fullScreen
         present(destination, animated: true, completion: nil)
     }
@@ -118,5 +124,27 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         let width = view.frame.size.width - 2 * 18
         let height = width * 0.953
         return CGSize(width: width, height: height)
+    }
+}
+
+extension RocketsViewController: UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let firstViewController = presenting as? RocketsViewController,
+              let secondViewController = presented as? RocketDetailViewController,
+              let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
+        else { return nil }
+        
+        animator = Animator(type: .present, firstViewController: firstViewController, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        return animator
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        guard let secondViewController = dismissed as? RocketDetailViewController,
+              let selectedCellImageViewSnapshot = selectedCellImageViewSnapshot
+        else { return nil }
+        
+        animator = Animator(type: .dismiss, firstViewController: self, secondViewController: secondViewController, selectedCellImageViewSnapshot: selectedCellImageViewSnapshot)
+        return animator
     }
 }

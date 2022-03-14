@@ -24,7 +24,7 @@
 		F0711AB627D4D968008806C7 /* LaunchDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */; };
 		F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */; };
 		F0711ABA27D4DF04008806C7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB927D4DF04008806C7 /* UIImageView.swift */; };
-		F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */; };
+		F09AB66027DCECFA00A050D6 /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AB65F27DCECFA00A050D6 /* Animator.swift */; };
 		F0F0426D27DA3D3A00225F78 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0426C27DA3D3A00225F78 /* String+Date.swift */; };
 		F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */; };
 		F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */; };
@@ -52,7 +52,7 @@
 		F0711AB527D4D968008806C7 /* LaunchDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchDetailViewController.swift; sourceTree = "<group>"; };
 		F0711AB727D4D98A008806C7 /* LaunchpadDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadDetailViewController.swift; sourceTree = "<group>"; };
 		F0711AB927D4DF04008806C7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
-		F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		F09AB65F27DCECFA00A050D6 /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
 		F0F0426C27DA3D3A00225F78 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -162,7 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				F0711AA227D4D77B008806C7 /* NetworkManager.swift */,
-				F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */,
+				F09AB65F27DCECFA00A050D6 /* Animator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -299,7 +299,7 @@
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
-				F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */,
+				F09AB66027DCECFA00A050D6 /* Animator.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
