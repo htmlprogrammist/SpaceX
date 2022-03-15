@@ -7,15 +7,18 @@
 
 import UIKit
 
-final class LaunchesViewController: UIViewController {
+final class LaunchesViewController: UICollectionViewController {
     
-    private var networkManager: NetworkManagerProtocol
+//    private var rockets = [Rocket]()
+    private let networkManager: NetworkManagerProtocol
+    private let transitionManager: TransitionManagerProtocol
     
+//    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
     
-    
-    init(networkManager: NetworkManagerProtocol) {
+    init(networkManager: NetworkManagerProtocol, transitionManager: TransitionManagerProtocol) {
         self.networkManager = networkManager
-        super.init(nibName: nil, bundle: nil)
+        self.transitionManager = transitionManager
+        super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
     required init?(coder: NSCoder) {

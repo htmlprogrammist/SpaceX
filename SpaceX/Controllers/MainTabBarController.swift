@@ -9,11 +9,12 @@ import UIKit
 
 final class MainTabBarController: UITabBarController {
     
-    lazy var networkManager: NetworkManager = {
+    private lazy var networkManager: NetworkManager = {
         let configuration = URLSessionConfiguration.default
         let networkManager = NetworkManager(session: URLSession(configuration: configuration))
         return networkManager
     }()
+    private let transitionManager = TransitionManager(duration: 0.24)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,12 +27,18 @@ final class MainTabBarController: UITabBarController {
     }
     
     private func createTabs() {
-        let rocketsViewController = createNavController(viewController: RocketsViewController(networkManager: networkManager),
-                                                        itemName: "Rockets", itemImage: "rocket")
-        let launchesViewController = createNavController(viewController: LaunchesViewController(networkManager: networkManager),
-                                                        itemName: "Launches", itemImage: "adjustment")
-        let launchpadsViewController = createNavController(viewController: LaunchpadsViewController(networkManager: networkManager),
-                                                        itemName: "Launchpads", itemImage: "lego")
+        
+        let rocketsViewController = createNavController(
+            viewController: RocketsViewController(networkManager: networkManager, transitionManager: transitionManager),
+            itemName: "Rockets", itemImage: "rocket")
+        
+        let launchesViewController = createNavController(
+            viewController: LaunchesViewController(networkManager: networkManager, transitionManager: transitionManager),
+            itemName: "Launches", itemImage: "adjustment")
+        
+        let launchpadsViewController = createNavController(
+            viewController: LaunchpadsViewController(networkManager: networkManager, transitionManager: transitionManager),
+            itemName: "Launchpads", itemImage: "lego")
         
         viewControllers = [rocketsViewController, launchesViewController, launchpadsViewController]
     }

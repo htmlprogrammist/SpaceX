@@ -7,6 +7,18 @@
 
 import UIKit
 
+protocol TransitionManagerProtocol {
+    var duration: TimeInterval { get }
+    
+    // UIViewControllerAnimatedTransitioning
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning)
+    
+    // UIViewControllerTransitioningDelegate
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning?
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning?
+}
+
 protocol Transitionable {
     var view: UIView! { get set }
     
@@ -28,17 +40,20 @@ enum PresentationType {
     }
 }
 
-class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
+class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, TransitionManagerProtocol {
     
-    static let duration = 0.24
-    
+    public var duration: TimeInterval
     private var type: PresentationType?
     private var fromVC: UIViewController?
     private var toVC: UIViewController?
     
+    init(duration: TimeInterval) {
+        self.duration = duration
+    }
+    
     // MARK: UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        TransitionManager.duration
+        return duration
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
