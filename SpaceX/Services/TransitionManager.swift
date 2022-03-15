@@ -32,7 +32,15 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     static let duration = 0.4
     
-    private var type: PresentationType?
+    private var type: PresentationType
+    private let fromVC: UIViewController
+    private let toVC: UIViewController
+    
+    init(type: PresentationType, fromVC: UIViewController, toVC: UIViewController) {
+        self.type = type
+        self.fromVC = fromVC
+        self.toVC = toVC
+    }
     
     // MARK: UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -41,8 +49,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let fromViewController = transitionContext.viewController(forKey: .from) as? TransitionManagerProtocol,
-              let toViewController = transitionContext.viewController(forKey: .to) as? TransitionManagerProtocol
+        guard let fromViewController = fromVC as? TransitionManagerProtocol,
+              let toViewController = toVC as? TransitionManagerProtocol
         else {
             transitionContext.completeTransition(false)
             return
@@ -117,16 +125,5 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             }
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
-    }
-    
-    // MARK: UIViewControllerTransitioningDelegate
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        type = .presentation
-        return self
-    }
-    
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        type = .dismissal
-        return self
     }
 }

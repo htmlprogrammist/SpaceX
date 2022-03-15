@@ -12,7 +12,7 @@ final class RocketsViewController: UICollectionViewController {
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
     
-    private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
+    private var transitionManager: TransitionManager? // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
     public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
     
     init(networkManager: NetworkManagerProtocol) {
@@ -102,7 +102,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
-        destination.transitioningDelegate = transitionManager
+        destination.transitioningDelegate = self
         destination.modalPresentationStyle = .fullScreen
         
         selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
@@ -166,5 +166,17 @@ extension RocketsViewController: TransitionManagerProtocol {
         }
         
         return UIView()
+    }
+}
+
+extension RocketsViewController: UIViewControllerTransitioningDelegate {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transitionManager = TransitionManager(type: .presentation, fromVC: source, toVC: presented)
+        return transitionManager
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        transitionManager = TransitionManager(type: .presentation, fromVC: dismissed, toVC: self)
+        return transitionManager
     }
 }
