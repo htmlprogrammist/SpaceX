@@ -99,7 +99,6 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
             
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-//            mainStackView.topAnchor.constraint(lessThanOrEqualTo: titleLabel.bottomAnchor, constant: 20)
             mainStackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -8)
         ])
     }

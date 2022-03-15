@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+final class MainTabBarController: UITabBarController {
     
     lazy var networkManager: NetworkManager = {
         let configuration = URLSessionConfiguration.default

@@ -30,9 +30,11 @@ enum PresentationType {
 
 class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
-    static let duration = 0.4
+    static let duration = 0.24
     
     private var type: PresentationType?
+    private var fromVC: UIViewController?
+    private var toVC: UIViewController?
     
     // MARK: UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
@@ -41,8 +43,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let fromViewController = transitionContext.viewController(forKey: .from) as? TransitionManagerProtocol,
-              let toViewController = transitionContext.viewController(forKey: .to) as? TransitionManagerProtocol
+        guard let fromViewController = fromVC as? TransitionManagerProtocol,
+              let toViewController = toVC as? TransitionManagerProtocol
         else {
             transitionContext.completeTransition(false)
             return
@@ -59,9 +61,6 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         if type == .dismissal {
             containerView.bringSubviewToFront(fromViewController.view)
         }
-        
-//        fromViewController.view.setNeedsLayout()
-//        fromViewController.view.layoutIfNeeded()
         
         let fromViews = fromViewController.viewsToAnimate()
         let toViews = toViewController.viewsToAnimate()
@@ -83,12 +82,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             
             let toView = toViews[i]
             var toFrame: CGRect
-//            if let tempToFrame = toViewController.frameForView?(toView) {
-//                toFrame = tempToFrame
-//            } else {
-//                toFrame = toView.superview!.convert(toView.frame, to: nil)
-//            }
-            toFrame = toView.superview!.convert(toView.frame, to: nil) // code from if-else above
+            
+            toFrame = toView.superview!.convert(toView.frame, to: nil)
             toFrames.append(toFrame)
             toView.alpha = 0
         }
@@ -122,11 +117,15 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     // MARK: UIViewControllerTransitioningDelegate
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         type = .presentation
+        fromVC = source
+        toVC = presented
         return self
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         type = .dismissal
+        toVC = fromVC // last `fromVC` is now `toVC`
+        fromVC = dismissed // and now we set this to fromVC
         return self
     }
 }

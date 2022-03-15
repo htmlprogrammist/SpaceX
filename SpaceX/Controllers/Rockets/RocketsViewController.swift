@@ -135,7 +135,7 @@ extension RocketsViewController: TransitionManagerProtocol {
     
     func copyForView(_ subView: UIView) -> UIView {
         guard let selectedCell = selectedCell else { return UIView() }
-        /* потом протестить, когда уже всё будет работать
+        
         switch subView {
         case is UIImageView:
             let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
@@ -145,26 +145,11 @@ extension RocketsViewController: TransitionManagerProtocol {
         case is UILabel:
             let labelCopy = UILabel()
             labelCopy.text = selectedCell.titleLabel.text
-            labelCopy.textColor = .white // MARK: !!!
-            labelCopy.backgroundColor = selectedCell.titleLabel.backgroundColor
+            labelCopy.font = selectedCell.titleLabel.font
+            labelCopy.textColor = .white
             return labelCopy
         default:
             return subView
         }
-        */
-        if subView == selectedCell.imageView {
-            let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
-            imageViewCopy.contentMode = selectedCell.imageView.contentMode
-            imageViewCopy.clipsToBounds = true
-            return imageViewCopy
-        } else if subView == selectedCell.titleLabel {
-            let labelCopy = UILabel()
-            labelCopy.text = selectedCell.titleLabel.text
-            labelCopy.textColor = .white // MARK: !!! нужно ли это?
-            labelCopy.backgroundColor = selectedCell.titleLabel.backgroundColor
-            return labelCopy
-        }
-        
-        return UIView()
     }
 }

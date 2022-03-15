@@ -7,31 +7,31 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "07E0C0AA-0A8E-47EE-832A-C0CCDE85A11F"
+            uuid = "A73177A7-5D14-438F-9522-2EAC363074A0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceX/Services/TransitionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "animateTransition(using:)"
-            landmarkType = "7">
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "TransitionManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5CF57E87-7BFD-4714-A865-3C91E7DCF1B1"
-            shouldBeEnabled = "Yes"
+            uuid = "8A061BAC-FECD-4448-B909-A813763009EB"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SpaceX/Services/TransitionManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "118"
+            endingLineNumber = "118"
             landmarkName = "animationController(forPresented:presenting:source:)"
             landmarkType = "7">
          </BreakpointContent>

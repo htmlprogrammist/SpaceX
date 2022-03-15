@@ -131,8 +131,7 @@ extension RocketDetailViewController: TransitionManagerProtocol {
             let labelCopy = UILabel()
             labelCopy.text = titleLabel.text
             labelCopy.font = titleLabel.font
-            labelCopy.textColor = .white // MARK: !!! нужно ли это?
-            labelCopy.backgroundColor = titleLabel.backgroundColor
+            labelCopy.textColor = .black
             return labelCopy
         }
         
