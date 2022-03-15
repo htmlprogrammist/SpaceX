@@ -122,20 +122,20 @@ extension RocketDetailViewController: TransitionManagerProtocol {
     }
     
     func copyForView(_ subView: UIView) -> UIView {
-        if subView == imageView {
+        switch subView {
+        case is UIImageView:
             let imageViewCopy = UIImageView(image: imageView.image)
             imageViewCopy.contentMode = imageView.contentMode
             imageViewCopy.clipsToBounds = true
             return imageViewCopy
-        } else if subView == titleLabel {
+        case is UILabel:
             let labelCopy = UILabel()
             labelCopy.text = titleLabel.text
-            labelCopy.font = titleLabel.font
-            labelCopy.textColor = .white // MARK: !!! нужно ли это?
-            labelCopy.backgroundColor = titleLabel.backgroundColor
+            labelCopy.font = UIFont.systemFont(ofSize: 36, weight: .bold)
+            labelCopy.textColor = .black
             return labelCopy
+        default:
+            return subView
         }
-        
-        return UIView()
     }
 }

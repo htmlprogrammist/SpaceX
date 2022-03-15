@@ -30,7 +30,7 @@ enum PresentationType {
 
 class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     
-    static let duration = 0.4
+    static let duration = 0.24
     
     private var type: PresentationType
     private let fromVC: UIViewController
