@@ -9,14 +9,6 @@ import UIKit
 
 protocol TransitionManagerProtocol {
     var duration: TimeInterval { get }
-    
-    // UIViewControllerAnimatedTransitioning
-    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval
-    func animateTransition(using transitionContext: UIViewControllerContextTransitioning)
-    
-    // UIViewControllerTransitioningDelegate
-    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning?
-    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning?
 }
 
 protocol Transitionable {
