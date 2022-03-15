@@ -11,7 +11,10 @@ final class RocketsViewController: UICollectionViewController {
     
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
-    private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
+    
+    private let transitionManager = TransitionManager(type: .presentation) // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
+    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    public var selectedCellImageViewSnapshot: UIView? // a snapshot of the image view of selected cell
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -101,7 +104,12 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
         let destination = RocketDetailViewController()
         destination.rocket = rockets[indexPath.row]
         destination.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(destination, animated: true)
+        destination.transitioningDelegate = transitionManager
+        
+        selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
+        selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
+        
+        present(destination, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -122,34 +130,27 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
 extension RocketsViewController: TransitionManagerProtocol {
     
     func viewsToAnimate() -> [UIView] {
-//        let cell: UICollectionViewCell
-        if let indexPath = collectionView.indexPathsForSelectedItems {
-            guard let cell = collectionView.cellForItem(at: indexPath.first ?? IndexPath()) as? RocketsCollectionViewCell else {
-                RocketsCollectionViewCell()
-//                UICollectionViewCell()
-                return []
-            }
-            
-            return [cell.imageView, cell.titleLabel]
-        } else {
-            return []
-        }
+        guard let selectedCell = selectedCell else { return [] }
         
-//        guard let imageView = cell.imageView, let label = cell.titleLabel else {
-//            return []
-//        }
-//        return [imageView, label]
+        return [selectedCell.imageView, selectedCell.titleLabel]
     }
     
     func copyForView(_ subView: UIView) -> UIView {
-//        let cell = tableView.cellForRow(at: tableView.indexPathForSelectedRow!)!
-        guard let cell = collectionView.cellForItem(at: collectionView.indexPathsForSelectedItems?.first ?? IndexPath()) as? RocketsCollectionViewCell else { return UIView() }
-        if subView is UIImageView {
-            return UIImageView(image: cell.imageView.image)
-        } else {
-            let label = UILabel()
-            label.text = cell.titleLabel.text
-            return label
+        guard let selectedCell = selectedCell else { return UIView() }
+        
+        if subView == selectedCell.imageView {
+            let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
+            imageViewCopy.contentMode = selectedCell.imageView.contentMode
+            imageViewCopy.clipsToBounds = true
+            return imageViewCopy
+        } else if subView == selectedCell.titleLabel {
+            let labelCopy = UILabel()
+            labelCopy.text = selectedCell.titleLabel.text
+            labelCopy.textColor = .white // MARK: !!! нужно ли это?
+            labelCopy.backgroundColor = selectedCell.titleLabel.backgroundColor
+            return labelCopy
         }
+        
+        return UIView()
     }
 }
