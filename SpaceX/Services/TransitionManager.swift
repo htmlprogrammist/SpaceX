@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TransitionManagerProtocol {
+protocol TransitionManagerProtocol: UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     var duration: TimeInterval { get }
 }
 
@@ -22,7 +22,7 @@ protocol Transitionable {
     func copyForView(_ subView: UIView) -> UIView
 }
 
-enum PresentationType {
+private enum PresentationType {
     
     case presentation
     case dismissal
@@ -32,9 +32,10 @@ enum PresentationType {
     }
 }
 
-class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, TransitionManagerProtocol {
+final class TransitionManager: NSObject, TransitionManagerProtocol {
     
     public var duration: TimeInterval
+    
     private var type: PresentationType?
     private var fromVC: UIViewController?
     private var toVC: UIViewController?
@@ -131,7 +132,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         type = .dismissal
-        toVC = fromVC // last `fromVC` is now `toVC`
+        toVC = fromVC // last `fromVC` is now `toVC`. This code is safe, because TabBar is hidden, so there won't be any changes to avoid rewriting `toVC`
         fromVC = dismissed // and now we set this to fromVC
         return self
     }
