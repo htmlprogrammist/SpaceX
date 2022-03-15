@@ -11,6 +11,9 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
     
     static let identifier = "rocketsCell"
     
+    private let titleData = ["First launch", "Launch cost", "Success"]
+    private var subtitleData = [String]()
+    
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -27,7 +30,7 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
     }()
     
     lazy var mainStackView: UIStackView = {
-        let stackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 30)
+        let stackView = UIStackView(arrangedSubviews: [], axis: .horizontal, spacing: 20)
         stackView.distribution = .fillProportionally
         return stackView
     }()
@@ -47,12 +50,10 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         imageView.loadImage(for: rocket.flickrImages?.first ?? "")
         titleLabel.text = rocket.name
         
-        // getting String from Rocket, parsing it with current dateFormat and then format date to normal view
-        // Types: Unformatted String -> Date -> Formatted String
+        // getting String from Rocket, parsing it with entered dateFormat and then format date to normal view
+        // Types: (Unformatted) String -> Date -> (Formatted) String
         let formattedDateOfFirstFlight = (rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate()
-        
-        let titleData = ["First launch", "Launch cost", "Success"]
-        let subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%"]
+        subtitleData = ["\(formattedDateOfFirstFlight)", "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%"]
         
         for subview in mainStackView.arrangedSubviews {
             mainStackView.removeArrangedSubview(subview)
@@ -61,7 +62,7 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         for i in 0..<3 {
             let mainLabel = UILabel(text: titleData[i], weight: .bold)
             let subtitleLabel = UILabel(text: subtitleData[i], weight: .bold, color: .slateGray)
-            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 4)
+            let subStackView = UIStackView(arrangedSubviews: [mainLabel, subtitleLabel], spacing: 2)
             mainStackView.addArrangedSubview(subStackView)
         }
     }
@@ -70,6 +71,20 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(mainStackView)
+        
+        // Shadows
+        contentView.layer.cornerRadius = 20
+        contentView.layer.borderWidth = 1.0
+        contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.masksToBounds = true
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.shadowColor = UIColor.black.withAlphaComponent(0.37).cgColor
+        layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        layer.shadowRadius = 3.0
+        layer.shadowOpacity = 1.0
+        layer.cornerRadius = 20.0
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
     }
     
     private func setConstraints() {
@@ -77,14 +92,14 @@ final class RocketsCollectionViewCell: UICollectionViewCell {
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 240),
+            imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 30/47),
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
             
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            mainStackView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 27)
+            mainStackView.bottomAnchor.constraint(greaterThanOrEqualTo: contentView.bottomAnchor, constant: -8)
         ])
     }
 }

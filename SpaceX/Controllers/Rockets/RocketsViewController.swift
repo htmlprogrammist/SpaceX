@@ -12,6 +12,9 @@ final class RocketsViewController: UICollectionViewController {
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
     
+    private let transitionManager = TransitionManager() // Если мне сойдёт с рук использование одного транзишнМенеджера на весь проект, то надо будет сделать так же, как и с NetworkManager'ом (TransitionManagerProtocol)
+    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
@@ -91,18 +94,20 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RocketsCollectionViewCell.identifier, for: indexPath) as? RocketsCollectionViewCell else { return UICollectionViewCell() }
-        cell.backgroundColor = .white
-        cell.layer.cornerRadius = 20
         cell.configure(rocket: rockets[indexPath.row])
-        cell.clipsToBounds = true
+        cell.clipsToBounds = false
         return cell
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destination = RocketDetailViewController()
-        destination.rocket = rockets[indexPath.row]
+        let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(destination, animated: true)
+        destination.transitioningDelegate = transitionManager
+        destination.modalPresentationStyle = .fullScreen
+        
+        selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
+        
+        present(destination, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -114,6 +119,37 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.size.width - 2 * 18, height: 360)
+        let width = view.frame.size.width - 2 * 18
+        let height = width * 0.953
+        return CGSize(width: width, height: height)
+    }
+}
+
+extension RocketsViewController: Transitionable {
+    
+    func viewsToAnimate() -> [UIView] {
+        guard let selectedCell = selectedCell else { return [] }
+        
+        return [selectedCell.imageView, selectedCell.titleLabel]
+    }
+    
+    func copyForView(_ subView: UIView) -> UIView {
+        guard let selectedCell = selectedCell else { return UIView() }
+        
+        switch subView {
+        case is UIImageView:
+            let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
+            imageViewCopy.contentMode = selectedCell.imageView.contentMode
+            imageViewCopy.clipsToBounds = true
+            return imageViewCopy
+        case is UILabel:
+            let labelCopy = UILabel()
+            labelCopy.text = selectedCell.titleLabel.text
+            labelCopy.font = selectedCell.titleLabel.font
+            labelCopy.textColor = .white
+            return labelCopy
+        default:
+            return subView
+        }
     }
 }
