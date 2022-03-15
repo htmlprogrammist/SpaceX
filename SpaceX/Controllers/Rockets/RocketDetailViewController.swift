@@ -41,7 +41,7 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
     
     lazy var closeButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "backButton")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.setImage(UIImage(named: "chevronBackward")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .coral
         button.addTarget(self, action: #selector(closeVC), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
