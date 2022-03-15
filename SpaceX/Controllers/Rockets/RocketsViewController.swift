@@ -12,7 +12,7 @@ final class RocketsViewController: UICollectionViewController {
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
     
-    private let transitionManager = TransitionManager(type: .presentation) // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
+    private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
     public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
     
     init(networkManager: NetworkManagerProtocol) {

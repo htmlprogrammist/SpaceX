@@ -32,11 +32,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     static let duration = 0.4
     
-    var type: PresentationType
-    
-    init(type: PresentationType) {
-        self.type = type
-    }
+    private var type: PresentationType?
     
     // MARK: UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
