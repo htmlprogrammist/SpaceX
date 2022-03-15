@@ -17,19 +17,14 @@ protocol Transitionable {
     // Return the views which shoud be animated in the transition
     func viewsToAnimate() -> [UIView]
     
-    // Return a copy of the view which is passed in
+    // Return a copy of the view which is passed in.
     // The passed in view is one of the views to animate
     func copyForView(_ subView: UIView) -> UIView
 }
 
 private enum PresentationType {
-    
     case presentation
     case dismissal
-    
-    var isPresenting: Bool {
-        return self == .presentation
-    }
 }
 
 final class TransitionManager: NSObject, TransitionManagerProtocol {
@@ -132,8 +127,9 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         type = .dismissal
-        toVC = fromVC // last `fromVC` is now `toVC`. This code is safe, because TabBar is hidden, so there won't be any changes to avoid rewriting `toVC`
-        fromVC = dismissed // and now we set this to fromVC
+        // This code is safe, because TabBar is hidden, so there won't be any chances to switch to another VC and skip this `forDismissed` method
+        toVC = fromVC // last `fromVC` is now `toVC`.
+        fromVC = dismissed // and now we set our dismissed VC to fromVC
         return self
     }
 }

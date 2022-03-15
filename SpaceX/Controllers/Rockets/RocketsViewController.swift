@@ -13,11 +13,12 @@ final class RocketsViewController: UICollectionViewController {
     private let networkManager: NetworkManagerProtocol
     private let transitionManager: TransitionManagerProtocol
     
-    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped). Needed for transitions.
     
     init(networkManager: NetworkManagerProtocol, transitionManager: TransitionManagerProtocol) {
         self.networkManager = networkManager
         self.transitionManager = transitionManager
+        
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -101,22 +102,21 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
+        
         let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
         destination.transitioningDelegate = transitionManager
         destination.modalPresentationStyle = .fullScreen
-        
-        selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
-        
         present(destination, animated: true, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        UIEdgeInsets(top: 30, left: 18, bottom: 30, right: 18)
+        return UIEdgeInsets(top: 30, left: 18, bottom: 30, right: 18)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        30
+        return 30
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
