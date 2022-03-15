@@ -115,7 +115,7 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
     }
 }
 
-extension RocketDetailViewController: TransitionManagerProtocol {
+extension RocketDetailViewController: Transitionable {
     
     func viewsToAnimate() -> [UIView] {
         return [imageView, titleLabel]

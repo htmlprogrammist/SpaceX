@@ -7,7 +7,7 @@
 
 import UIKit
 
-protocol TransitionManagerProtocol {
+protocol Transitionable {
     var view: UIView! { get set }
     
     // Return the views which shoud be animated in the transition
@@ -43,8 +43,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        guard let fromViewController = fromVC as? TransitionManagerProtocol,
-              let toViewController = toVC as? TransitionManagerProtocol
+        guard let fromViewController = fromVC as? Transitionable,
+              let toViewController = toVC as? Transitionable
         else {
             transitionContext.completeTransition(false)
             return

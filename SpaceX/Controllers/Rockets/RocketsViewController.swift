@@ -12,7 +12,7 @@ final class RocketsViewController: UICollectionViewController {
     private var rockets = [Rocket]()
     private var networkManager: NetworkManagerProtocol
     
-    private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
+    private let transitionManager = TransitionManager() // Если мне сойдёт с рук использование одного транзишнМенеджера на весь проект, то надо будет сделать так же, как и с NetworkManager'ом (TransitionManagerProtocol)
     public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
     
     init(networkManager: NetworkManagerProtocol) {
@@ -125,7 +125,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension RocketsViewController: TransitionManagerProtocol {
+extension RocketsViewController: Transitionable {
     
     func viewsToAnimate() -> [UIView] {
         guard let selectedCell = selectedCell else { return [] }
