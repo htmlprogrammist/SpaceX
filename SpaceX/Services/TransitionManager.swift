@@ -97,12 +97,12 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
         }
         
         if type == .presentation {
-            toViewController.view.frame = fromViewController.view.frame.offsetBy(dx: fromViewController.view.frame.size.width, dy: 0)
+            toViewController.view.frame = fromViewController.view.frame.offsetBy(dx: 0, dy: fromViewController.view.frame.size.height)
         }
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: [], animations: { () -> Void in
             if self.type == .dismissal {
-                fromViewController.view.frame = fromViewController.view.frame.offsetBy(dx: fromViewController.view.frame.size.width, dy: 0)
+                fromViewController.view.frame = fromViewController.view.frame.offsetBy(dx: 0, dy: fromViewController.view.frame.size.height)
             } else {
                 toViewController.view.frame = fromViewController.view.frame
             }
