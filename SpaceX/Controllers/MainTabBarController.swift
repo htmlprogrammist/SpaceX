@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController {
     
     lazy var networkManager: NetworkManager = {
         let configuration = URLSessionConfiguration.default
@@ -32,7 +32,7 @@ final class MainTabBarController: UITabBarController {
                                                         itemName: "Launches", itemImage: "adjustment")
         let launchpadsViewController = createNavController(viewController: LaunchpadsViewController(networkManager: networkManager),
                                                         itemName: "Launchpads", itemImage: "lego")
-        rocketsViewController.definesPresentationContext = true
+        
         viewControllers = [rocketsViewController, launchesViewController, launchpadsViewController]
     }
     
