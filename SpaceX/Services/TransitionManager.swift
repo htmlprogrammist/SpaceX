@@ -122,6 +122,8 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
     // MARK: UIViewControllerTransitioningDelegate
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         type = .presentation
+        presenting.definesPresentationContext = true
+        source.definesPresentationContext = true
         return self
     }
     

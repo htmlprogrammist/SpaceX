@@ -10,10 +10,14 @@ import UIKit
 final class RocketsViewController: UICollectionViewController {
     
     private var rockets = [Rocket]()
-    private var networkManager: NetworkManagerProtocol
+    private let networkManager: NetworkManagerProtocol
     
     private let transitionManager = TransitionManager() // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
     public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    
+//    override var definesPresentationContext: Bool {
+//        return true
+//    }
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -26,7 +30,7 @@ final class RocketsViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        definesPresentationContext = true
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowUpAndDown"), style: .plain, target: self, action: #selector(sortButtonTapped))
         view.backgroundColor = .glaucous
         collectionView.backgroundColor = .transparent
@@ -102,6 +106,7 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
+        definesPresentationContext = true
         destination.transitioningDelegate = transitionManager
         destination.modalPresentationStyle = .fullScreen
         
