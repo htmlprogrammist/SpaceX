@@ -14,7 +14,6 @@ final class RocketsViewController: UICollectionViewController {
     
     private let transitionManager = TransitionManager(type: .presentation) // UIViewControllerAnimatedTransitioning, если мне сойдёт с рук использование одного транзишнМенеджера на весь проект
     public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
-    public var selectedCellImageViewSnapshot: UIView? // a snapshot of the image view of selected cell
     
     init(networkManager: NetworkManagerProtocol) {
         self.networkManager = networkManager
@@ -101,13 +100,12 @@ extension RocketsViewController: UICollectionViewDelegateFlowLayout {
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let destination = RocketDetailViewController()
-        destination.rocket = rockets[indexPath.row]
+        let destination = RocketDetailViewController(rocket: rockets[indexPath.row])
         destination.hidesBottomBarWhenPushed = true
         destination.transitioningDelegate = transitionManager
+        destination.modalPresentationStyle = .fullScreen
         
         selectedCell = collectionView.cellForItem(at: indexPath) as? RocketsCollectionViewCell
-        selectedCellImageViewSnapshot = selectedCell?.imageView.snapshotView(afterScreenUpdates: false)
         
         present(destination, animated: true, completion: nil)
     }
@@ -137,7 +135,23 @@ extension RocketsViewController: TransitionManagerProtocol {
     
     func copyForView(_ subView: UIView) -> UIView {
         guard let selectedCell = selectedCell else { return UIView() }
-        
+        /* потом протестить, когда уже всё будет работать
+        switch subView {
+        case is UIImageView:
+            let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
+            imageViewCopy.contentMode = selectedCell.imageView.contentMode
+            imageViewCopy.clipsToBounds = true
+            return imageViewCopy
+        case is UILabel:
+            let labelCopy = UILabel()
+            labelCopy.text = selectedCell.titleLabel.text
+            labelCopy.textColor = .white // MARK: !!!
+            labelCopy.backgroundColor = selectedCell.titleLabel.backgroundColor
+            return labelCopy
+        default:
+            return subView
+        }
+        */
         if subView == selectedCell.imageView {
             let imageViewCopy = UIImageView(image: selectedCell.imageView.image)
             imageViewCopy.contentMode = selectedCell.imageView.contentMode

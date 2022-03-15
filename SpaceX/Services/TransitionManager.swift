@@ -38,6 +38,7 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
         self.type = type
     }
     
+    // MARK: UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         TransitionManager.duration
     }
@@ -120,5 +121,16 @@ class TransitionManager: NSObject, UIViewControllerAnimatedTransitioning, UIView
             }
             transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         }
+    }
+    
+    // MARK: UIViewControllerTransitioningDelegate
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        type = .presentation
+        return self
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        type = .dismissal
+        return self
     }
 }
