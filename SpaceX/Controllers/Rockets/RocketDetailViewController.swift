@@ -38,7 +38,6 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "chevronBackward")?.withRenderingMode(.alwaysTemplate), for: .normal)
@@ -48,12 +47,28 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         return button
     }()
     
+    let containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .clear
+        view.alpha = 0
+        view.autoresizingMask = .flexibleHeight
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     let textView: UILabel = {
         let textView = UILabel()
         textView.numberOfLines = 0
-        textView.translatesAutoresizingMaskIntoConstraints = false
         textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac dapibus metus. Vivamus ac nisl varius, tempor odio sit amet, eleifend nulla. Suspendisse potenti. Integer feugiat semper sapien, sed dictum mauris rhoncus eu. Aliquam auctor, dui et sagittis pretium, dui tortor vehicula nulla, at viverra nibh turpis eu orci. Nam ac est id orci ultricies lobortis ut vitae mauris. Pellentesque in euismod mauris, eget posuere turpis. Pellentesque semper finibus nunc vel tincidunt. Ut lacus orci, lacinia tincidunt consequat at, luctus non diam. Nam in molestie metus, porta lacinia dui. Fusce quis purus ac nulla rhoncus placerat id ac velit. Phasellus dapibus pretium enim, at imperdiet lacus pharetra id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam facilisis sollicitudin erat, eu ullamcorper neque sollicitudin sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac dapibus metus. Vivamus ac nisl varius, tempor odio sit amet, eleifend nulla. Suspendisse potenti. Integer feugiat semper sapien, sed dictum mauris rhoncus eu. Aliquam auctor, dui et sagittis pretium, dui tortor vehicula nulla, at viverra nibh turpis eu orci. Nam ac est id orci ultricies lobortis ut vitae mauris. Pellentesque in euismod mauris, eget posuere turpis. Pellentesque semper finibus nunc vel tincidunt. Ut lacus orci, lacinia tincidunt consequat at, luctus non diam. Nam in molestie metus, porta lacinia dui. Fusce quis purus ac nulla rhoncus placerat id ac velit. Phasellus dapibus pretium enim, at imperdiet lacus pharetra id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam facilisis sollicitudin erat, eu ullamcorper neque sollicitudin sit amet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque ac dapibus metus. Vivamus ac nisl varius, tempor odio sit amet, eleifend nulla. Suspendisse potenti. Integer feugiat semper sapien, sed dictum mauris rhoncus eu. Aliquam auctor, dui et sagittis pretium, dui tortor vehicula nulla, at viverra nibh turpis eu orci. Nam ac est id orci ultricies lobortis ut vitae mauris. Pellentesque in euismod mauris, eget posuere turpis. Pellentesque semper finibus nunc vel tincidunt. Ut lacus orci, lacinia tincidunt consequat at, luctus non diam. Nam in molestie metus, porta lacinia dui. Fusce quis purus ac nulla rhoncus placerat id ac velit. Phasellus dapibus pretium enim, at imperdiet lacus pharetra id. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nam facilisis sollicitudin erat, eu ullamcorper neque sollicitudin sit amet."
+        textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
+    }()
+    lazy var gradientLayer: CAGradientLayer = {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
+        gradientLayer.locations = [0.51, 1]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 0, y: 01)
+        return gradientLayer
     }()
     
     init(rocket: Rocket) {
@@ -74,15 +89,28 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         setConstraints()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        UIView.transition(with: containerView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
+            containerView.alpha = 1
+        }, completion: nil)
+    }
+    
     private func setupView() {
         view.addSubview(scrollView)
-        scrollView.addSubview(imageView)
-        scrollView.addSubview(titleLabel)
-        scrollView.addSubview(closeButton)
-        scrollView.addSubview(textView)
         
+        scrollView.addSubview(imageView)
         imageView.loadImage(for: rocket.flickrImages?.first ?? "")
+        imageView.layer.addSublayer(gradientLayer)
+        
+        scrollView.addSubview(titleLabel)
         titleLabel.text = rocket.name
+        
+        scrollView.addSubview(closeButton)
+        scrollView.addSubview(containerView)
+        
+        containerView.addSubview(textView)
     }
     
     private func setConstraints() {
@@ -97,14 +125,19 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
             imageView.topAnchor.constraint(equalTo: view.topAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 383/414),
             
-            titleLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
             
             closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
             closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
             
-            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
+            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            
+            textView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
+            textView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
             textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
             textView.widthAnchor.constraint(equalToConstant: view.frame.size.width - 32)
         ])
@@ -130,7 +163,7 @@ extension RocketDetailViewController: Transitionable {
         } else if subView == titleLabel {
             let labelCopy = UILabel()
             labelCopy.text = titleLabel.text
-            labelCopy.font = titleLabel.font
+            labelCopy.font = UIFont.systemFont(ofSize: 24, weight: .bold)
             labelCopy.textColor = .black
             return labelCopy
         }
