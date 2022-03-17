@@ -31,7 +31,6 @@
 		F0F5FABD27D54BEF00F8FDD7 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */; };
 		F0FCDC7D27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */; };
 		F0FCDC7F27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */; };
-		F0FCDC8127E3365A00EAFDA2 /* TabBarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,7 +61,6 @@
 		F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
 		F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadsCollectionViewCell.swift; sourceTree = "<group>"; };
-		F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,7 +167,6 @@
 			children = (
 				F0711AA227D4D77B008806C7 /* NetworkManager.swift */,
 				F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */,
-				F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -311,7 +308,6 @@
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
 				F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */,
-				F0FCDC8127E3365A00EAFDA2 /* TabBarAnimator.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,

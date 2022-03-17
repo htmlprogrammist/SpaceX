@@ -9,6 +9,10 @@ import UIKit
 
 protocol TransitionManagerProtocol: UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate {
     var duration: TimeInterval { get }
+    var type: TransitionType { get }
+    
+    func animateTabBarController(transitionContext: UIViewControllerContextTransitioning)
+    func animateViewControllers(transitionContext: UIViewControllerContextTransitioning)
 }
 
 protocol Transitionable {
@@ -22,6 +26,11 @@ protocol Transitionable {
     func copyForView(_ subView: UIView) -> UIView
 }
 
+public enum TransitionType {
+    case tabBarController
+    case viewController
+}
+
 private enum PresentationType {
     case presentation
     case dismissal
@@ -30,13 +39,27 @@ private enum PresentationType {
 final class TransitionManager: NSObject, TransitionManagerProtocol {
     
     public var duration: TimeInterval
+    public var type: TransitionType
     
-    private var type: PresentationType?
+    // For view controllers
+    private var presentationTypeVC: PresentationType?
     private var fromVC: UIViewController?
     private var toVC: UIViewController?
     
     init(duration: TimeInterval) {
         self.duration = duration
+        type = .viewController
+    }
+    
+    // For tab bar controller
+    private var tabBarController: UITabBarController?
+    private var lastIndex: Int?
+    
+    init(duration: TimeInterval, tabBarController: UITabBarController, lastIndex: Int) {
+        self.duration = duration
+        self.tabBarController = tabBarController
+        self.lastIndex = lastIndex
+        type = .tabBarController
     }
     
     // MARK: UIViewControllerAnimatedTransitioning
@@ -45,7 +68,46 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        switch type {
+        case .tabBarController:
+            animateTabBarController(transitionContext: transitionContext)
+        case .viewController:
+            animateViewControllers(transitionContext: transitionContext)
+        }
+    }
+    
+    // MARK: Transitioning methods (TabBar & ViewController)
+    func animateTabBarController(transitionContext: UIViewControllerContextTransitioning) {
+        guard let fromViewController = transitionContext.viewController(forKey: .from),
+              let toViewController = transitionContext.viewController(forKey: .to),
+              let tabBarController = tabBarController,
+              let lastIndex = lastIndex
+        else {
+            transitionContext.completeTransition(false)
+            return
+        }
         
+        let containerView = transitionContext.containerView
+        containerView.addSubview(toViewController.view)
+        
+        var viewWidth = toViewController.view.bounds.width
+        
+        if tabBarController.selectedIndex < lastIndex {
+            viewWidth = -viewWidth
+        }
+        
+        toViewController.view.transform = CGAffineTransform(translationX: viewWidth, y: 0)
+        
+        UIView.animate(withDuration: transitionDuration(using: (transitionContext)), delay: 0.0, usingSpringWithDamping: 1.2, initialSpringVelocity: 2.5, options: .transitionCrossDissolve, animations: {
+            toViewController.view.transform = CGAffineTransform.identity
+            fromViewController.view.transform = CGAffineTransform(translationX: -viewWidth, y: 0)
+        }, completion: { _ in
+            fromViewController.view.transform = CGAffineTransform.identity
+            transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
+        })
+    }
+    
+    func animateViewControllers(transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = fromVC as? Transitionable,
               let toViewController = toVC as? Transitionable
         else {
@@ -61,7 +123,7 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
         toViewController.view.setNeedsLayout()
         toViewController.view.layoutIfNeeded()
         
-        if type == .dismissal {
+        if presentationTypeVC == .dismissal {
             containerView.bringSubviewToFront(fromViewController.view)
         }
         
@@ -91,12 +153,12 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
             toView.alpha = 0
         }
         
-        if type == .presentation {
+        if presentationTypeVC == .presentation {
             toViewController.view.frame = fromViewController.view.frame.offsetBy(dx: 0, dy: fromViewController.view.frame.size.height)
         }
         
         UIView.animate(withDuration: transitionDuration(using: transitionContext), delay: 0.0, options: [], animations: { () -> Void in
-            if self.type == .dismissal {
+            if self.presentationTypeVC == .dismissal {
                 fromViewController.view.frame = fromViewController.view.frame.offsetBy(dx: 0, dy: fromViewController.view.frame.size.height)
             } else {
                 toViewController.view.frame = fromViewController.view.frame
@@ -120,14 +182,14 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
     
     // MARK: UIViewControllerTransitioningDelegate
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        type = .presentation
+        presentationTypeVC = .presentation
         fromVC = source
         toVC = presented
         return self
     }
     
     func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        type = .dismissal
+        presentationTypeVC = .dismissal
         // This code is safe, because TabBar is hidden, so there won't be any chances to switch to another VC and skip this `forDismissed` method
         toVC = fromVC // last `fromVC` is now `toVC`.
         fromVC = dismissed // and now we set our dismissed VC to fromVC

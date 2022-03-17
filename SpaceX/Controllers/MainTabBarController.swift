@@ -58,6 +58,6 @@ final class MainTabBarController: UITabBarController {
 extension MainTabBarController: UITabBarControllerDelegate {
     
     public func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return TabBarAnimator(tabBarController: tabBarController, lastIndex: tabBarController.selectedIndex)
+        return TransitionManager(duration: 0.25, tabBarController: tabBarController, lastIndex: tabBarController.selectedIndex)
     }
 }
