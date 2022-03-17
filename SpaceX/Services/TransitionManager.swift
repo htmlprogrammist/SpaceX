@@ -105,6 +105,7 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
             for i in 0..<intermediateViews.count {
                 let intermediateView = intermediateViews[i]
                 intermediateView.frame = toFrames[i]
+//                intermediateView.backgroundColor = .red // в ту сторону работает нормально, а вот в обратную - нифига
             }
         }) { (_) -> Void in
             for i in 0..<intermediateViews.count {
