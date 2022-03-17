@@ -46,14 +46,14 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
     private var fromVC: UIViewController?
     private var toVC: UIViewController?
     
+    // For tab bar controller
+    private var tabBarController: UITabBarController?
+    private var lastIndex: Int?
+    
     init(duration: TimeInterval) {
         self.duration = duration
         type = .viewController
     }
-    
-    // For tab bar controller
-    private var tabBarController: UITabBarController?
-    private var lastIndex: Int?
     
     init(duration: TimeInterval, tabBarController: UITabBarController, lastIndex: Int) {
         self.duration = duration
