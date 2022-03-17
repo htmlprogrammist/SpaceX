@@ -41,7 +41,7 @@ class TabBarAnimator: NSObject, UIViewControllerAnimatedTransitioning {
         
         toViewController.view.transform = CGAffineTransform(translationX: viewWidth, y: 0)
         
-        UIView.animate(withDuration: self.transitionDuration(using: (transitionContext)), delay: 0.0, usingSpringWithDamping: 1.2, initialSpringVelocity: 2.5, options: .transitionCrossDissolve, animations: {
+        UIView.animate(withDuration: transitionDuration(using: (transitionContext)), delay: 0.0, usingSpringWithDamping: 1.2, initialSpringVelocity: 2.5, options: .transitionCrossDissolve, animations: {
             toViewController.view.transform = CGAffineTransform.identity
             fromViewController.view.transform = CGAffineTransform(translationX: -viewWidth, y: 0)
         }, completion: { _ in
