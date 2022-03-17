@@ -24,7 +24,6 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
     }()
     
     lazy var imageView: UIImageView = {
-        // MARK: Add dimming effect (gradient)
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
@@ -63,12 +62,12 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         return textView
     }()
     lazy var gradientLayer: CAGradientLayer = {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.clear.cgColor, UIColor.black.cgColor]
-        gradientLayer.locations = [0.51, 1]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 0, y: 01)
-        return gradientLayer
+        let layer = CAGradientLayer()
+        layer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.7).cgColor]
+        layer.locations = [0.5, 1]
+        layer.startPoint = CGPoint(x: 0, y: 0)
+        layer.endPoint = CGPoint(x: 0, y: 1)
+        return layer
     }()
     
     init(rocket: Rocket) {
@@ -95,6 +94,12 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         UIView.transition(with: containerView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
             containerView.alpha = 1
         }, completion: nil)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        gradientLayer.frame = imageView.layer.bounds
     }
     
     private func setupView() {
