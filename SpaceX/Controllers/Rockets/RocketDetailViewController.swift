@@ -164,6 +164,7 @@ extension RocketDetailViewController: Transitionable {
             let imageViewCopy = UIImageView(image: imageView.image)
             imageViewCopy.contentMode = imageView.contentMode
             imageViewCopy.clipsToBounds = true
+            imageViewCopy.layer.cornerRadius = 20
             return imageViewCopy
         } else if subView == titleLabel {
             let labelCopy = UILabel()
