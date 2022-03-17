@@ -21,6 +21,7 @@ final class MainTabBarController: UITabBarController {
         
         createTabs()
         
+        delegate = self
         tabBar.barTintColor = .glaucous
         tabBar.unselectedItemTintColor = .champagne
         tabBar.tintColor = .coral
@@ -50,5 +51,13 @@ final class MainTabBarController: UITabBarController {
         navController.navigationBar.barTintColor = .glaucous
         navController.navigationBar.tintColor = .coral
         return navController
+    }
+}
+
+// MARK: Transitioning
+extension MainTabBarController: UITabBarControllerDelegate {
+    
+    public func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return TabBarAnimator(tabBarController: tabBarController, lastIndex: tabBarController.selectedIndex)
     }
 }

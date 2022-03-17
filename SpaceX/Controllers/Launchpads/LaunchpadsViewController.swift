@@ -9,15 +9,16 @@ import UIKit
 
 final class LaunchpadsViewController: UICollectionViewController {
     
-    //    private var rockets = [Rocket]()
+    //    private var launchpads = [Launchpad]()
     private let networkManager: NetworkManagerProtocol
     private let transitionManager: TransitionManagerProtocol
     
-    //    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    public var selectedCell: LaunchpadsCollectionViewCell? // a cell that was selected (tapped)
     
     init(networkManager: NetworkManagerProtocol, transitionManager: TransitionManagerProtocol) {
         self.networkManager = networkManager
         self.transitionManager = transitionManager
+        
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -30,15 +31,14 @@ final class LaunchpadsViewController: UICollectionViewController {
         
         view.backgroundColor = .glaucous
         
-        setupView()
-        setConstraints()
-    }
-    
-    private func setupView() {
+        collectionView.backgroundColor = .transparent
+        collectionView.register(LaunchpadsCollectionViewCell.self, forCellWithReuseIdentifier: LaunchpadsCollectionViewCell.identifier)
+        collectionView.showsVerticalScrollIndicator = false
         
+        fetchData()
     }
     
-    private func setConstraints() {
+    private func fetchData() {
         
     }
 }

@@ -9,15 +9,16 @@ import UIKit
 
 final class LaunchesViewController: UICollectionViewController {
     
-//    private var rockets = [Rocket]()
+//    private var launches = [Launch]()
     private let networkManager: NetworkManagerProtocol
     private let transitionManager: TransitionManagerProtocol
     
-//    public var selectedCell: RocketsCollectionViewCell? // a cell that was selected (tapped)
+    public var selectedCell: LaunchesCollectionViewCell? // a cell that was selected (tapped)
     
     init(networkManager: NetworkManagerProtocol, transitionManager: TransitionManagerProtocol) {
         self.networkManager = networkManager
         self.transitionManager = transitionManager
+        
         super.init(collectionViewLayout: UICollectionViewFlowLayout())
     }
     
@@ -29,17 +30,14 @@ final class LaunchesViewController: UICollectionViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .glaucous
+        collectionView.backgroundColor = .transparent
+        collectionView.register(LaunchesCollectionViewCell.self, forCellWithReuseIdentifier: LaunchesCollectionViewCell.identifier)
+        collectionView.showsVerticalScrollIndicator = false
         
-        setupView()
-        setConstraints()
+        fetchData()
     }
     
-    
-    private func setupView() {
-        
-    }
-    
-    private func setConstraints() {
+    private func fetchData() {
         
     }
 }

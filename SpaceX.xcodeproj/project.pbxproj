@@ -29,6 +29,9 @@
 		F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */; };
 		F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */; };
 		F0F5FABD27D54BEF00F8FDD7 /* UIStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */; };
+		F0FCDC7D27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */; };
+		F0FCDC7F27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */; };
+		F0FCDC8127E3365A00EAFDA2 /* TabBarAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +60,9 @@
 		F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		F0F5FABC27D54BEF00F8FDD7 /* UIStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIStackView.swift; sourceTree = "<group>"; };
+		F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchesCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchpadsCollectionViewCell.swift; sourceTree = "<group>"; };
+		F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarAnimator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +169,7 @@
 			children = (
 				F0711AA227D4D77B008806C7 /* NetworkManager.swift */,
 				F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */,
+				F0FCDC8027E3365A00EAFDA2 /* TabBarAnimator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -188,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				F0711AAB27D4D875008806C7 /* RocketsCollectionViewCell.swift */,
+				F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */,
+				F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -294,12 +303,15 @@
 				F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */,
 				F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */,
 				F0711AA327D4D77B008806C7 /* NetworkManager.swift in Sources */,
+				F0FCDC7F27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift in Sources */,
 				F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */,
 				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
+				F0FCDC7D27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
 				F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */,
+				F0FCDC8127E3365A00EAFDA2 /* TabBarAnimator.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
