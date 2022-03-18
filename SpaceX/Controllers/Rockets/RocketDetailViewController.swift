@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
+final class RocketDetailViewController: UIViewController {
     
     public let rocket: Rocket
     
@@ -17,9 +17,7 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         view.showsHorizontalScrollIndicator = false
         view.showsVerticalScrollIndicator = false
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.contentSize = CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height * 10)
 //        view.bounces = true
-//        view.delegate = self
         return view
     }()
     
@@ -58,16 +56,8 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         let view = UIView()
         view.backgroundColor = .clear
         view.alpha = 0
-        view.autoresizingMask = .flexibleHeight
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    let textView: UILabel = {
-        let textView = UILabel()
-        textView.numberOfLines = 0
-        textView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. P"
-        textView.translatesAutoresizingMaskIntoConstraints = false
-        return textView
     }()
     
     lazy var wikiButton: UIButton = {
@@ -93,6 +83,7 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         imageView.contentMode = .scaleAspectFill
         return imageView
     }()
+    private let label1 = UILabel(text: "Text", size: 24, weight: .black)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,13 +94,13 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         setConstraints()
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        super.viewDidAppear(animated)
-//
-//        UIView.transition(with: containerView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
-//            containerView.alpha = 1
-//        }, completion: nil)
-//    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
+        UIView.transition(with: containerView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
+            containerView.alpha = 1
+        }, completion: nil)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -128,47 +119,43 @@ final class RocketDetailViewController: UIViewController, UIScrollViewDelegate {
         titleLabel.text = rocket.name
         
         scrollView.addSubview(closeButton)
-//        scrollView.addSubview(containerView)
+        scrollView.addSubview(containerView)
         
-//        containerView.addSubview(textView)
-        
-        scrollView.addSubview(textView)
-        scrollView.addSubview(imageView1)
+        containerView.addSubview(imageView1)
+        containerView.addSubview(label1)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
             scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            scrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
+            scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
             
-            imageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: view.topAnchor),
+            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 383/414),
             
             titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
             
-            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
             
-//            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-//            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-//            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-//            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
+            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            containerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
             
-//            textView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 16),
-//            textView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -16),
-            textView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            textView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: -16),
-            textView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            textView.widthAnchor.constraint(equalToConstant: view.frame.size.width - 32),
+            imageView1.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
+            imageView1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            imageView1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20),
             
-            imageView1.topAnchor.constraint(equalTo: textView.bottomAnchor, constant: 20),
-            imageView1.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            imageView1.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor, constant: 20),
+            label1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            label1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            label1.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 20),
         ])
     }
     
