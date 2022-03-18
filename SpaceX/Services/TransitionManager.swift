@@ -62,7 +62,7 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
         type = .tabBarController
     }
     
-    // MARK: UIViewControllerAnimatedTransitioning
+    // MARK: - UIViewControllerAnimatedTransitioning
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
@@ -76,7 +76,7 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
         }
     }
     
-    // MARK: Transitioning methods (TabBar & ViewController)
+    // MARK: - Transitioning methods (TabBar & ViewController)
     func animateTabBarController(transitionContext: UIViewControllerContextTransitioning) {
         guard let fromViewController = transitionContext.viewController(forKey: .from),
               let toViewController = transitionContext.viewController(forKey: .to),
@@ -180,7 +180,7 @@ final class TransitionManager: NSObject, TransitionManagerProtocol {
         }
     }
     
-    // MARK: UIViewControllerTransitioningDelegate
+    // MARK: - UIViewControllerTransitioningDelegate
     func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         presentationTypeVC = .presentation
         fromVC = source

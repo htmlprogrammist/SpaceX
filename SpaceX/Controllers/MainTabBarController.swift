@@ -15,7 +15,7 @@ final class MainTabBarController: UITabBarController {
         return networkManager
     }()
     private let transitionManager = TransitionManager(duration: 0.24)
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +54,7 @@ final class MainTabBarController: UITabBarController {
     }
 }
 
-// MARK: Transitioning
+// MARK: - Transitioning
 extension MainTabBarController: UITabBarControllerDelegate {
     
     public func tabBarController(_ tabBarController: UITabBarController, animationControllerForTransitionFrom fromVC: UIViewController, to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {

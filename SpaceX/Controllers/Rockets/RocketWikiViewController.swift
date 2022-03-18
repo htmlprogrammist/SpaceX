@@ -21,8 +21,8 @@ final class RocketWikiViewController: UIViewController {
     
     lazy var backButton = UIBarButtonItem(image: UIImage(named: "chevronBackward"), style: .plain, target: self, action: #selector(backAction))
     lazy var forwardButton = UIBarButtonItem(image: UIImage(named: "chevronForward"), style: .plain, target: self, action: #selector(forwardAction))
-    lazy var shareButton = UIBarButtonItem(image: UIImage(named: "shareIcon"), style: .plain, target: self, action: #selector(refreshAction))
-    lazy var safariButton = UIBarButtonItem(image: UIImage(named: "safari"), style: .plain, target: self, action: #selector(refreshAction))
+    lazy var shareButton = UIBarButtonItem(image: UIImage(named: "shareIcon"), style: .plain, target: self, action: #selector(shareAction))
+    lazy var safariButton = UIBarButtonItem(image: UIImage(named: "safari"), style: .plain, target: self, action: #selector(safariAction))
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,24 +49,45 @@ final class RocketWikiViewController: UIViewController {
             toolBar.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
     }
+    
+    @objc private func loadRequest(url: String) {
+        guard let url = URL(string: url) else { return }
+        let urlRequest = URLRequest(url: url)
+        webView.load(urlRequest)
+    }
 }
 
-// MARK: UIBarButtonItems @objc methods
+// MARK: - UIBarButtonItems @objc methods
 extension RocketWikiViewController {
     
-    @objc func backAction() {
+    @objc private func backAction() {
+        guard webView.canGoBack else { return }
+        webView.goBack()
+    }
+    
+    @objc private func forwardAction() {
+        guard webView.canGoForward else { return }
+        webView.goForward()
+    }
+    
+    @objc private func shareAction() {
         
     }
     
-    @objc func forwardAction() {
+    @objc private func safariAction() {
         
     }
+}
+
+// MARK: - WKNavigationDelegate
+extension RocketWikiViewController: WKNavigationDelegate {
     
-    @objc func refreshAction() {
-        
-    }
+//    func webView(_ webView: WKWebView, didCommit navigation: WKNavigation!) {
+//        <#code#>
+//    }
     
-    @objc func safariAction() {
-        
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        backButton.isEnabled = webView.canGoBack
+        forwardButton.isEnabled = webView.canGoForward
     }
 }
