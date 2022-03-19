@@ -70,6 +70,7 @@ final class RocketDetailViewController: UIViewController {
         let overview = OverviewView(titleText: "Overview", labels: labels, data: data)
         return overview
     }()
+    lazy var imageCollectionView = ImagesView(imagesUrls: rocket.flickrImages ?? [])
     
     private lazy var wikiButton: UIButton = {
         let button = UIButton()
@@ -82,6 +83,11 @@ final class RocketDetailViewController: UIViewController {
         button.addTarget(self, action: #selector(openWiki), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
+    }()
+    private lazy var containerView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     init(rocket: Rocket) {
@@ -162,6 +168,8 @@ final class RocketDetailViewController: UIViewController {
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(overviewView)
         overviewView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(imageCollectionView)
+        imageCollectionView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(wikiButton)
         
         NSLayoutConstraint.activate([
@@ -179,8 +187,19 @@ final class RocketDetailViewController: UIViewController {
             overviewView.topAnchor.constraint(equalTo: descriptionView.descriptionLabel.bottomAnchor, constant: 30),
             overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            wikiButton.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
+//            imageCollectionView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
+//            imageCollectionView.
+            
+            wikiButton.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 20),
             wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
+        ])
+        
+        contentView.addSubview(containerView)
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: wikiButton.bottomAnchor),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     

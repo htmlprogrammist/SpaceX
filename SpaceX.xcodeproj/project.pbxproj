@@ -26,6 +26,8 @@
 		F0711ABA27D4DF04008806C7 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711AB927D4DF04008806C7 /* UIImageView.swift */; };
 		F088B70827E5B33400D4DF05 /* DescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70727E5B33400D4DF05 /* DescriptionView.swift */; };
 		F088B70A27E5CDC200D4DF05 /* OverviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70927E5CDC200D4DF05 /* OverviewView.swift */; };
+		F088B70C27E5DD8B00D4DF05 /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */; };
+		F088B70E27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70D27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift */; };
 		F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */; };
 		F0F0426D27DA3D3A00225F78 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0426C27DA3D3A00225F78 /* String+Date.swift */; };
 		F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */; };
@@ -58,6 +60,8 @@
 		F0711AB927D4DF04008806C7 /* UIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageView.swift; sourceTree = "<group>"; };
 		F088B70727E5B33400D4DF05 /* DescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionView.swift; sourceTree = "<group>"; };
 		F088B70927E5CDC200D4DF05 /* OverviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverviewView.swift; sourceTree = "<group>"; };
+		F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
+		F088B70D27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
 		F0F0426C27DA3D3A00225F78 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
@@ -190,6 +194,7 @@
 				F0711AA927D4D85C008806C7 /* AlertError.swift */,
 				F088B70727E5B33400D4DF05 /* DescriptionView.swift */,
 				F088B70927E5CDC200D4DF05 /* OverviewView.swift */,
+				F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,6 +205,7 @@
 				F0711AAB27D4D875008806C7 /* RocketsCollectionViewCell.swift */,
 				F0FCDC7C27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift */,
 				F0FCDC7E27E3325E00EAFDA2 /* LaunchpadsCollectionViewCell.swift */,
+				F088B70D27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -313,12 +319,14 @@
 				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
 				F0FCDC7D27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
+				F088B70E27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,
 				F0711AB827D4D98A008806C7 /* LaunchpadDetailViewController.swift in Sources */,
 				F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */,
 				F0711AAA27D4D85C008806C7 /* AlertError.swift in Sources */,
 				F0711A9627D4D6D7008806C7 /* MainTabBarController.swift in Sources */,
 				F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */,
+				F088B70C27E5DD8B00D4DF05 /* ImagesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
