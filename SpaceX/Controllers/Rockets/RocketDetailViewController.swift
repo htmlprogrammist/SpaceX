@@ -63,6 +63,9 @@ final class RocketDetailViewController: UIViewController {
         return view
     }()
     lazy var descriptionView = DescriptionView(text: rocket.rocketDescription ?? "")
+    lazy var overviewView = OverviewView(titleText: "Overview",
+                                     labels: ["First launch", "Launch cost", "Success", "Mass", "Height", "Diameter"],
+                                     data: [rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate(), String(rocket.costPerLaunch), String(rocket.successRatePct), String(rocket.mass?.kg), String(rocket.height?.meters), String(rocket.diameter?.meters)])
     
     private lazy var wikiButton: UIButton = {
         let button = UIButton()
@@ -111,22 +114,25 @@ final class RocketDetailViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(scrollView)
+        view.addSubview(closeButton)
+        
         scrollView.addSubview(topView)
-        scrollView.addSubview(closeButton)
         
         topView.addSubview(imageView)
         imageView.layer.addSublayer(gradientLayer)
         topView.addSubview(titleLabel)
-//        topView.addSubview(closeButton)
         
         showDetails()
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
+            closeButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
             topView.topAnchor.constraint(equalTo: scrollView.topAnchor),
@@ -142,10 +148,6 @@ final class RocketDetailViewController: UIViewController {
             
             titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 20),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
-//            closeButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
-//            closeButton.topAnchor.constraint(equalTo: topView.topAnchor, constant: 16),
-            closeButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
-            closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
         ])
     }
     
@@ -154,6 +156,8 @@ final class RocketDetailViewController: UIViewController {
         
         contentView.addSubview(descriptionView)
         descriptionView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(overviewView)
+        overviewView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(wikiButton)
         
         NSLayoutConstraint.activate([
@@ -167,7 +171,11 @@ final class RocketDetailViewController: UIViewController {
             descriptionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
             descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            wikiButton.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
+            overviewView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            overviewView.topAnchor.constraint(equalTo: descriptionView.descriptionLabel.bottomAnchor, constant: 20),
+            overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            wikiButton.topAnchor.constraint(equalTo: overviewView.contentView.bottomAnchor, constant: 20),
             wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }

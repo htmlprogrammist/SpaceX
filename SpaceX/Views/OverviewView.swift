@@ -1,5 +1,5 @@
 //
-//  DescriptionView.swift
+//  OverviewView.swift
 //  SpaceX
 //
 //  Created by Егор Бадмаев on 19.03.2022.
@@ -7,26 +7,23 @@
 
 import UIKit
 
-final class DescriptionView: UIView {
+final class OverviewView: UIView {
     
-    private var text: String
+    private var titleText: String
+    private var labels: [String]
+    private var data: [String]
     
     private lazy var contentView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    private lazy var titleLabel = UILabel(text: "Description", size: 24, weight: .bold)
+    private lazy var titleLabel = UILabel(text: titleText, size: 24, weight: .bold)
     
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    init(text: String) {
-        self.text = text
+    init(titleText: String, labels: [String], data: [String]) {
+        self.titleText = titleText
+        self.labels = labels
+        self.data = data
         super.init(frame: .zero)
         
         setupViewAndConstraints()
@@ -39,8 +36,6 @@ final class DescriptionView: UIView {
     private func setupViewAndConstraints() {
         addSubview(contentView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
-        descriptionLabel.text = text
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -51,10 +46,6 @@ final class DescriptionView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
-            descriptionLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            descriptionLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
 }
