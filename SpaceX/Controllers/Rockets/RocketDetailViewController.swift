@@ -114,7 +114,7 @@ final class RocketDetailViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    private lazy var containerView: UIView = {
+    private lazy var footer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
@@ -199,7 +199,7 @@ final class RocketDetailViewController: UIViewController {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
         
-        containerView.addSubview(materialsLabel)
+        contentView.addSubview(materialsLabel)
         contentView.addSubview(wikiButton)
         
         NSLayoutConstraint.activate([
@@ -222,7 +222,7 @@ final class RocketDetailViewController: UIViewController {
 //            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             enginesView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 30),
-//            overviewView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
+//            enginesView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
             enginesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             enginesView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -238,18 +238,18 @@ final class RocketDetailViewController: UIViewController {
             landingLegsView.topAnchor.constraint(equalTo: secondStageView.mainStackView.bottomAnchor, constant: 30),
             landingLegsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            materialsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            materialsLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             materialsLabel.topAnchor.constraint(equalTo: landingLegsView.mainStackView.bottomAnchor, constant: 20),
             wikiButton.topAnchor.constraint(equalTo: materialsLabel.bottomAnchor, constant: 20),
             wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
         
-        contentView.addSubview(containerView)
+        contentView.addSubview(footer)
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: wikiButton.bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            footer.topAnchor.constraint(equalTo: wikiButton.bottomAnchor),
+            footer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            footer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            footer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
     
