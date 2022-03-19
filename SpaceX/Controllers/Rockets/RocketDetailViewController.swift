@@ -42,6 +42,7 @@ final class RocketDetailViewController: UIViewController {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
+        label.text = rocket.name
         label.font = UIFont.systemFont(ofSize: 48, weight: .bold)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -60,6 +61,20 @@ final class RocketDetailViewController: UIViewController {
         view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    lazy var descriptionView = DescriptionView(text: rocket.rocketDescription ?? "")
+    
+    private lazy var wikiButton: UIButton = {
+        let button = UIButton()
+        button.semanticContentAttribute = .forceRightToLeft
+        button.setTitle("Wiki", for: .normal)
+        button.setTitleColor(UIColor.coral, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
+        button.setImage(UIImage(named: "link")?.withRenderingMode(.alwaysTemplate), for: .normal)
+        button.tintColor = .coral
+        button.addTarget(self, action: #selector(openWiki), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     init(rocket: Rocket) {
@@ -97,11 +112,14 @@ final class RocketDetailViewController: UIViewController {
     private func setupView() {
         view.addSubview(scrollView)
         scrollView.addSubview(topView)
-        scrollView.addSubview(contentView)
+        scrollView.addSubview(closeButton)
         
         topView.addSubview(imageView)
+        imageView.layer.addSublayer(gradientLayer)
         topView.addSubview(titleLabel)
-        topView.addSubview(closeButton)
+//        topView.addSubview(closeButton)
+        
+        showDetails()
     }
     
     private func setConstraints() {
@@ -122,21 +140,45 @@ final class RocketDetailViewController: UIViewController {
             imageView.topAnchor.constraint(equalTo: topView.topAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 383/414),
             
-            titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
-            titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
-            closeButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
-            closeButton.topAnchor.constraint(equalTo: topView.topAnchor, constant: 16),
-            
-            contentView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 20),
+            titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
+//            closeButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
+//            closeButton.topAnchor.constraint(equalTo: topView.topAnchor, constant: 16),
+            closeButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 20),
+            closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 20),
+        ])
+    }
+    
+    private func showDetails() {
+        scrollView.addSubview(contentView)
+        
+        contentView.addSubview(descriptionView)
+        descriptionView.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubview(wikiButton)
+        
+        NSLayoutConstraint.activate([
+            contentView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
             contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
             contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
+            descriptionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            descriptionView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            wikiButton.topAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 20),
+            wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }
     
     @objc func closeVC() {
         dismiss(animated: true)
+    }
+    
+    @objc func openWiki() {
+        let destination = RocketWikiViewController()
+        navigationController?.pushViewController(destination, animated: true)
     }
 }
 
@@ -152,7 +194,6 @@ extension RocketDetailViewController: Transitionable {
             let imageViewCopy = UIImageView(image: imageView.image)
             imageViewCopy.contentMode = imageView.contentMode
             imageViewCopy.clipsToBounds = true
-            imageViewCopy.layer.cornerRadius = 20
             return imageViewCopy
         case is UILabel:
             let labelCopy = UILabel()
