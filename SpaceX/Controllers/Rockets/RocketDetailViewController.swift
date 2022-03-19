@@ -63,9 +63,13 @@ final class RocketDetailViewController: UIViewController {
         return view
     }()
     lazy var descriptionView = DescriptionView(text: rocket.rocketDescription ?? "")
-    lazy var overviewView = OverviewView(titleText: "Overview",
-                                     labels: ["First launch", "Launch cost", "Success", "Mass", "Height", "Diameter"],
-                                     data: [rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate(), String(rocket.costPerLaunch), String(rocket.successRatePct), String(rocket.mass?.kg), String(rocket.height?.meters), String(rocket.diameter?.meters)])
+    lazy var overviewView: OverviewView = {
+        let labels = ["First launch", "Launch cost", "Success", "Mass", "Height", "Diameter"]
+        let formattedDateOfFirstFlight = (rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate()
+        let data = [formattedDateOfFirstFlight, "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%", "\(rocket.mass?.kg ?? 0) kg", "\(rocket.height?.meters ?? 0) meters", "\(rocket.diameter?.meters ?? 0) meters"]
+        let overview = OverviewView(titleText: "Overview", labels: labels, data: data)
+        return overview
+    }()
     
     private lazy var wikiButton: UIButton = {
         let button = UIButton()
@@ -172,10 +176,10 @@ final class RocketDetailViewController: UIViewController {
             descriptionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             overviewView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            overviewView.topAnchor.constraint(equalTo: descriptionView.descriptionLabel.bottomAnchor, constant: 20),
+            overviewView.topAnchor.constraint(equalTo: descriptionView.descriptionLabel.bottomAnchor, constant: 30),
             overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            wikiButton.topAnchor.constraint(equalTo: overviewView.contentView.bottomAnchor, constant: 20),
+            wikiButton.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
             wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }

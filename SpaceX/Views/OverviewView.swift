@@ -20,6 +20,12 @@ final class OverviewView: UIView {
     }()
     private lazy var titleLabel = UILabel(text: titleText, size: 24, weight: .bold)
     
+    lazy var mainStackView: UIStackView = {
+        let stackView = UIStackView(arrangedSubviews: [], axis: .vertical, spacing: 15)
+        stackView.distribution = .fillProportionally
+        return stackView
+    }()
+    
     init(titleText: String, labels: [String], data: [String]) {
         self.titleText = titleText
         self.labels = labels
@@ -36,6 +42,17 @@ final class OverviewView: UIView {
     private func setupViewAndConstraints() {
         addSubview(contentView)
         contentView.addSubview(titleLabel)
+        contentView.addSubview(mainStackView)
+        
+        for i in 0..<data.count {
+            let label1 = UILabel(text: labels[i], weight: .bold)
+            let label2 = UILabel(text: data[i], weight: .bold, color: .slateGray)
+            label2.textAlignment = .left
+            label1.widthAnchor.constraint(equalToConstant: 100).isActive = true
+            
+            let stackView = UIStackView(arrangedSubviews: [label1, label2], axis: .horizontal, spacing: 30)
+            mainStackView.addArrangedSubview(stackView)
+        }
         
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: topAnchor),
@@ -46,6 +63,10 @@ final class OverviewView: UIView {
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            mainStackView.topAnchor.constraint(greaterThanOrEqualTo: titleLabel.bottomAnchor, constant: 20)
         ])
     }
 }
