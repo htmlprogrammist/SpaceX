@@ -11,7 +11,7 @@ final class OverviewView: UIView {
     
     private var titleText: String
     private var labels: [String]
-    private var data: [String]
+    private var data: [String?]
     
     private lazy var contentView: UIView = {
         let view = UIView()
@@ -26,7 +26,7 @@ final class OverviewView: UIView {
         return stackView
     }()
     
-    init(titleText: String, labels: [String], data: [String]) {
+    init(titleText: String, labels: [String], data: [String?]) {
         self.titleText = titleText
         self.labels = labels
         self.data = data
@@ -46,7 +46,7 @@ final class OverviewView: UIView {
         
         for i in 0..<data.count {
             let label1 = UILabel(text: labels[i], weight: .bold)
-            let label2 = UILabel(text: data[i], weight: .bold, color: .slateGray)
+            let label2 = UILabel(text: data[i] ?? "", weight: .bold, color: .slateGray)
             label2.textAlignment = .left
             label1.widthAnchor.constraint(equalToConstant: 100).isActive = true
             

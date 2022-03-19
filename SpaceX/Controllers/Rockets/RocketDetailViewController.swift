@@ -14,6 +14,8 @@ final class RocketDetailViewController: UIViewController {
     private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsVerticalScrollIndicator = false
+        scrollView.contentInsetAdjustmentBehavior = .never
+        scrollView.bounces = false
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
     }()
@@ -72,6 +74,34 @@ final class RocketDetailViewController: UIViewController {
     }()
     lazy var imageCollectionView = ImagesView(imagesUrls: rocket.flickrImages ?? [])
     
+    lazy var enginesView: OverviewView = {
+        let labels = ["Type", "Layout", "Version", "Amount", "Propellant 1", "Propellant 2"]
+        let data = [rocket.engines?.type, rocket.engines?.layout, rocket.engines?.version, "\(rocket.engines?.number ?? 0)", rocket.engines?.propellant1, rocket.engines?.propellant2]
+        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        return overview
+    }()
+    lazy var firstStageView: OverviewView = {
+        let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust (sea level)", "Thrust (vacuum)"]
+        let formattedTrueFalse = (rocket.firstStage?.reusable ?? false) ? "Yes": "No"
+        let data = [formattedTrueFalse, "\(rocket.firstStage?.engines ?? 0)", "\(rocket.firstStage?.fuelAmountTons ?? 0) tons", "\(rocket.firstStage?.burnTimeSEC ?? 0) seconds", "\(rocket.firstStage?.thrustSeaLevel?.kN ?? 0) kN", "\(rocket.firstStage?.thrustVacuum?.kN ?? 0) kN"]
+        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        return overview
+    }()
+    lazy var secondStageView: OverviewView = {
+        let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust"]
+        let formattedTrueFalse = (rocket.secondStage?.reusable ?? false) ? "Yes": "No"
+        let data = [formattedTrueFalse, "\(rocket.secondStage?.engines ?? 0)", "\(rocket.secondStage?.fuelAmountTons ?? 0) tons", "\(rocket.secondStage?.burnTimeSEC ?? 0) seconds", "\(rocket.secondStage?.thrust?.kN ?? 0) kN"]
+        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        return overview
+    }()
+    lazy var landingLegsView: OverviewView = {
+        let labels = ["Amount", "Material"]
+        let data = ["\(rocket.landingLegs?.number ?? 0)", rocket.landingLegs?.material]
+        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        return overview
+    }()
+    
+    private lazy var materialsLabel = UILabel(text: "Materials", size: 24, weight: .bold)
     private lazy var wikiButton: UIButton = {
         let button = UIButton()
         button.semanticContentAttribute = .forceRightToLeft
@@ -164,12 +194,12 @@ final class RocketDetailViewController: UIViewController {
     private func showDetails() {
         scrollView.addSubview(contentView)
         
-        contentView.addSubview(descriptionView)
-        descriptionView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(overviewView)
-        overviewView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(imageCollectionView)
-        imageCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        [descriptionView, overviewView, imageCollectionView, enginesView, firstStageView, secondStageView, landingLegsView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        containerView.addSubview(materialsLabel)
         contentView.addSubview(wikiButton)
         
         NSLayoutConstraint.activate([
@@ -188,9 +218,29 @@ final class RocketDetailViewController: UIViewController {
             overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
 //            imageCollectionView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
-//            imageCollectionView.
+//            imageCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+//            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            wikiButton.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 20),
+            enginesView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 30),
+//            overviewView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
+            enginesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            enginesView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            firstStageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            firstStageView.topAnchor.constraint(equalTo: enginesView.mainStackView.bottomAnchor, constant: 30),
+            firstStageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            secondStageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            secondStageView.topAnchor.constraint(equalTo: firstStageView.mainStackView.bottomAnchor, constant: 30),
+            secondStageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            landingLegsView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            landingLegsView.topAnchor.constraint(equalTo: secondStageView.mainStackView.bottomAnchor, constant: 30),
+            landingLegsView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            
+            materialsLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
+            materialsLabel.topAnchor.constraint(equalTo: landingLegsView.mainStackView.bottomAnchor, constant: 20),
+            wikiButton.topAnchor.constraint(equalTo: materialsLabel.bottomAnchor, constant: 20),
             wikiButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
         
