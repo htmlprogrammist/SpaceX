@@ -45,13 +45,15 @@ final class OverviewView: UIView {
         contentView.addSubview(mainStackView)
         
         for i in 0..<data.count {
-            let label1 = UILabel(text: labels[i], weight: .bold)
-            let label2 = UILabel(text: data[i] ?? "", weight: .bold, color: .slateGray)
-            label2.textAlignment = .left
-            label1.widthAnchor.constraint(equalToConstant: 100).isActive = true
-            
-            let stackView = UIStackView(arrangedSubviews: [label1, label2], axis: .horizontal, spacing: 30)
-            mainStackView.addArrangedSubview(stackView)
+            if let dataUnwrapped = data[i] {
+                let label1 = UILabel(text: labels[i], weight: .bold)
+                let label2 = UILabel(text: dataUnwrapped, weight: .bold, color: .slateGray)
+                label2.textAlignment = .left
+                label1.widthAnchor.constraint(equalToConstant: 100).isActive = true
+                
+                let stackView = UIStackView(arrangedSubviews: [label1, label2], axis: .horizontal, spacing: 30)
+                mainStackView.addArrangedSubview(stackView)
+            }
         }
         
         NSLayoutConstraint.activate([

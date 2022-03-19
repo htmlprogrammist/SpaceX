@@ -84,20 +84,20 @@ final class RocketDetailViewController: UIViewController {
         let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust (sea level)", "Thrust (vacuum)"]
         let formattedTrueFalse = (rocket.firstStage?.reusable ?? false) ? "Yes": "No"
         let data = [formattedTrueFalse, "\(rocket.firstStage?.engines ?? 0)", "\(rocket.firstStage?.fuelAmountTons ?? 0) tons", "\(rocket.firstStage?.burnTimeSEC ?? 0) seconds", "\(rocket.firstStage?.thrustSeaLevel?.kN ?? 0) kN", "\(rocket.firstStage?.thrustVacuum?.kN ?? 0) kN"]
-        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        let overview = OverviewView(titleText: "First stage", labels: labels, data: data)
         return overview
     }()
     lazy var secondStageView: OverviewView = {
         let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust"]
         let formattedTrueFalse = (rocket.secondStage?.reusable ?? false) ? "Yes": "No"
         let data = [formattedTrueFalse, "\(rocket.secondStage?.engines ?? 0)", "\(rocket.secondStage?.fuelAmountTons ?? 0) tons", "\(rocket.secondStage?.burnTimeSEC ?? 0) seconds", "\(rocket.secondStage?.thrust?.kN ?? 0) kN"]
-        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        let overview = OverviewView(titleText: "Second stage", labels: labels, data: data)
         return overview
     }()
     lazy var landingLegsView: OverviewView = {
         let labels = ["Amount", "Material"]
         let data = ["\(rocket.landingLegs?.number ?? 0)", rocket.landingLegs?.material]
-        let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
+        let overview = OverviewView(titleText: "Landing legs", labels: labels, data: data)
         return overview
     }()
     
@@ -124,23 +124,23 @@ final class RocketDetailViewController: UIViewController {
         self.rocket = rocket
         super.init(nibName: nil, bundle: nil)
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = .white
-
+        
         setupView()
         setConstraints()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         UIView.transition(with: contentView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
             contentView.alpha = 1
         }, completion: nil)
