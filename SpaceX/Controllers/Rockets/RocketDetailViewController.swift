@@ -11,20 +11,23 @@ final class RocketDetailViewController: UIViewController {
     
     public let rocket: Rocket
     
-    lazy var scrollView: UIScrollView = {
-        let view = UIScrollView()
-        view.backgroundColor = .clear
-        view.showsHorizontalScrollIndicator = false
-        view.showsVerticalScrollIndicator = false
-        view.translatesAutoresizingMaskIntoConstraints = false
-//        view.bounces = true
-        return view
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        return scrollView
     }()
     
+    private lazy var topView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.layer.masksToBounds = true
+        imageView.loadImage(for: rocket.flickrImages?.first ?? "")
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -43,7 +46,7 @@ final class RocketDetailViewController: UIViewController {
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    lazy var closeButton: UIButton = {
+    private lazy var closeButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(named: "chevronBackward")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .coral
@@ -52,44 +55,27 @@ final class RocketDetailViewController: UIViewController {
         return button
     }()
     
-    let containerView: UIView = {
+    private lazy var contentView: UIView = {
         let view = UIView()
-        view.backgroundColor = .clear
         view.alpha = 0
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
-    }()
-    
-    lazy var wikiButton: UIButton = {
-        let button = UIButton()
-        
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
     }()
     
     init(rocket: Rocket) {
         self.rocket = rocket
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    private lazy var imageView1: UIImageView = {
-        let imageView = UIImageView()
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.image = UIImage(named: "imageV")
-        imageView.contentMode = .scaleAspectFill
-        return imageView
-    }()
-    private let label1 = UILabel(text: "Text", size: 24, weight: .black)
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         view.backgroundColor = .white
-        
+
         setupView()
         setConstraints()
     }
@@ -97,8 +83,8 @@ final class RocketDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        UIView.transition(with: containerView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
-            containerView.alpha = 1
+        UIView.transition(with: contentView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
+            contentView.alpha = 1
         }, completion: nil)
     }
     
@@ -110,52 +96,42 @@ final class RocketDetailViewController: UIViewController {
     
     private func setupView() {
         view.addSubview(scrollView)
+        scrollView.addSubview(topView)
+        scrollView.addSubview(contentView)
         
-        scrollView.addSubview(imageView)
-        imageView.loadImage(for: rocket.flickrImages?.first ?? "")
-        imageView.layer.addSublayer(gradientLayer)
-        
-        scrollView.addSubview(titleLabel)
-        titleLabel.text = rocket.name
-        
-        scrollView.addSubview(closeButton)
-        scrollView.addSubview(containerView)
-        
-        containerView.addSubview(imageView1)
-        containerView.addSubview(label1)
+        topView.addSubview(imageView)
+        topView.addSubview(titleLabel)
+        topView.addSubview(closeButton)
     }
     
     private func setConstraints() {
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
-            scrollView.leftAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leftAnchor),
-            scrollView.rightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.rightAnchor),
-            scrollView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             
-            imageView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            imageView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            imageView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            topView.topAnchor.constraint(equalTo: scrollView.topAnchor),
+            topView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            topView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            topView.bottomAnchor.constraint(equalTo: contentView.topAnchor),
+            topView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            
+            imageView.leadingAnchor.constraint(equalTo: topView.leadingAnchor),
+            imageView.trailingAnchor.constraint(equalTo: topView.trailingAnchor),
+            imageView.topAnchor.constraint(equalTo: topView.topAnchor),
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 383/414),
             
-            titleLabel.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
+            titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -16),
+            closeButton.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 16),
+            closeButton.topAnchor.constraint(equalTo: topView.topAnchor, constant: 16),
             
-            closeButton.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor, constant: 16),
-            closeButton.topAnchor.constraint(equalTo: scrollView.topAnchor, constant: 16),
-            
-            containerView.topAnchor.constraint(equalTo: imageView.bottomAnchor),
-            containerView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
-            containerView.widthAnchor.constraint(equalTo: view.safeAreaLayoutGuide.widthAnchor),
-            
-            imageView1.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 20),
-            imageView1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            imageView1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: 20),
-            
-            label1.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 20),
-            label1.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            label1.topAnchor.constraint(equalTo: imageView1.bottomAnchor, constant: 20),
+            contentView.topAnchor.constraint(equalTo: topView.bottomAnchor),
+            contentView.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor),
+            contentView.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
+            contentView.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor),
+            contentView.widthAnchor.constraint(equalTo: view.widthAnchor),
         ])
     }
     
