@@ -31,7 +31,7 @@ final class LaunchpadsViewController: UICollectionViewController {
         
         view.backgroundColor = .glaucous
         
-        collectionView.backgroundColor = .transparent
+        collectionView.backgroundColor = .clear
         collectionView.register(LaunchpadsCollectionViewCell.self, forCellWithReuseIdentifier: LaunchpadsCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         

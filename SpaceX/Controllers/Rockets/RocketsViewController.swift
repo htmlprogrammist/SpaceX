@@ -31,7 +31,7 @@ final class RocketsViewController: UICollectionViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "arrowUpAndDown"), style: .plain, target: self, action: #selector(sortButtonTapped))
         view.backgroundColor = .glaucous
-        collectionView.backgroundColor = .transparent
+        collectionView.backgroundColor = .clear
         collectionView.register(RocketsCollectionViewCell.self, forCellWithReuseIdentifier: RocketsCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         

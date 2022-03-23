@@ -29,6 +29,7 @@
 		F088B70C27E5DD8B00D4DF05 /* ImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */; };
 		F088B70E27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F088B70D27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift */; };
 		F09AB66027DCECFA00A050D6 /* TransitionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */; };
+		F09EE01327EB476800D7A7B0 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = F09EE01227EB476800D7A7B0 /* Launch.swift */; };
 		F0F0426D27DA3D3A00225F78 /* String+Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0426C27DA3D3A00225F78 /* String+Date.swift */; };
 		F0F5FAB927D5475D00F8FDD7 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */; };
 		F0F5FABB27D54A2100F8FDD7 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */; };
@@ -63,6 +64,7 @@
 		F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesView.swift; sourceTree = "<group>"; };
 		F088B70D27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesCollectionViewCell.swift; sourceTree = "<group>"; };
 		F09AB65F27DCECFA00A050D6 /* TransitionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionManager.swift; sourceTree = "<group>"; };
+		F09EE01227EB476800D7A7B0 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 		F0F0426C27DA3D3A00225F78 /* String+Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Date.swift"; sourceTree = "<group>"; };
 		F0F5FAB827D5475D00F8FDD7 /* UILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabel.swift; sourceTree = "<group>"; };
 		F0F5FABA27D54A2100F8FDD7 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
@@ -183,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				F0711AA427D4D78D008806C7 /* Rocket.swift */,
+				F09EE01227EB476800D7A7B0 /* Launch.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -302,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0F0426D27DA3D3A00225F78 /* String+Date.swift in Sources */,
+				F09EE01327EB476800D7A7B0 /* Launch.swift in Sources */,
 				F0711AB427D4D94A008806C7 /* RocketWikiViewController.swift in Sources */,
 				F0F5FABD27D54BEF00F8FDD7 /* UIStackView.swift in Sources */,
 				F0711ABA27D4DF04008806C7 /* UIImageView.swift in Sources */,

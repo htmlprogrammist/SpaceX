@@ -30,7 +30,7 @@ final class LaunchesViewController: UICollectionViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .glaucous
-        collectionView.backgroundColor = .transparent
+        collectionView.backgroundColor = .clear
         collectionView.register(LaunchesCollectionViewCell.self, forCellWithReuseIdentifier: LaunchesCollectionViewCell.identifier)
         collectionView.showsVerticalScrollIndicator = false
         

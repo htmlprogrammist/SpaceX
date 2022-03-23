@@ -17,5 +17,4 @@ extension UIColor {
     static let queenBlue = UIColor(red: 76/255, green: 96/255, blue: 133/255, alpha: 1)
     static let coral = UIColor(red: 255/255, green: 133/255, blue: 82/255, alpha: 1)
     static let cyanProcess = UIColor(red: 0/255, green: 165/255, blue: 224/255, alpha: 1)
-    static let transparent = UIColor(white: 1, alpha: 0)
 }
