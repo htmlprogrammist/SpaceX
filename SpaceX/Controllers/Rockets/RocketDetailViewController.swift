@@ -101,22 +101,14 @@ final class RocketDetailViewController: UIViewController {
     }()
     
     private lazy var materialsLabel = UILabel(text: "Materials", size: 24, weight: .bold)
-    private lazy var wikiButton: UIButton = {
-        let button = UIButton()
-        button.semanticContentAttribute = .forceRightToLeft
-        button.setTitle("Wiki", for: .normal)
-        button.setTitleColor(UIColor.coral, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        button.setImage(UIImage(named: "link")?.withRenderingMode(.alwaysTemplate), for: .normal)
-        button.tintColor = .coral
+    
+    private lazy var wikiButton: ShadowButton = {
+        let button = ShadowButton(title: "Wiki", imageName: "link")
         button.addTarget(self, action: #selector(openWiki), for: .touchUpInside)
-        button.backgroundColor = .white
-//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
-//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
-        button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     private lazy var footer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -237,10 +229,9 @@ final class RocketDetailViewController: UIViewController {
             overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
             imageCollectionView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
-            imageCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            imageCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-//            enginesView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 30),
             enginesView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
             enginesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             enginesView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
