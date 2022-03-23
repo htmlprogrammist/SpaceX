@@ -38,14 +38,23 @@ final class RocketsViewController: UICollectionViewController {
         fetchData()
     }
     
-//    override func viewWillDisappear(_ animated: Bool) {
-//        super.viewWillDisappear(animated)
-//    // надо в другом месте эту штуку реализовать, наверное
-//        guard let selectedCell = selectedCell else { return } // if else - do nothing
-//        UIView.transition(with: selectedCell, duration: 0.6, options: .curveEaseInOut, animations: {
-//            selectedCell.mainStackView.alpha = 0
-//        }, completion: nil)
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        guard let selectedCell = selectedCell else { return } // if else - do nothing
+        UIView.transition(with: selectedCell, duration: transitionManager.duration, options: .curveEaseInOut, animations: {
+            selectedCell.mainStackView.alpha = 1
+        }, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        guard let selectedCell = selectedCell else { return } // if else - do nothing
+        UIView.transition(with: selectedCell, duration: transitionManager.duration, options: .curveEaseInOut, animations: {
+            selectedCell.mainStackView.alpha = 0
+        }, completion: nil)
+    }
     
     @objc private func sortButtonTapped() {
         let alertController = UIAlertController(title: "Choose your option", message: nil, preferredStyle: .actionSheet)

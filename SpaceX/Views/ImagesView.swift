@@ -19,7 +19,7 @@ final class ImagesView: UIView {
     private lazy var titleLabel = UILabel(text: "Images", size: 24, weight: .bold)
     
     lazy var collectionView: UICollectionView = {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 145, height: 196)
         layout.scrollDirection = .horizontal
         
@@ -44,6 +44,8 @@ final class ImagesView: UIView {
         addSubview(contentView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(collectionView)
+        
+        collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(ImagesCollectionViewCell.self, forCellWithReuseIdentifier: ImagesCollectionViewCell.identifier)
         
@@ -54,8 +56,13 @@ final class ImagesView: UIView {
             contentView.bottomAnchor.constraint(equalTo: bottomAnchor),
             
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor),
             titleLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 20),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
         ])
     }
 }

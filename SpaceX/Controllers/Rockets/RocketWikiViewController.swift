@@ -36,6 +36,8 @@ final class RocketWikiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "reload"), style: .plain, target: self, action: #selector(reloadPage))
+        
         setupView()
         setConstraints()
     }
@@ -86,6 +88,10 @@ extension RocketWikiViewController {
     
     @objc private func safariAction() {
         
+    }
+    
+    @objc private func reloadPage() {
+        webView.reload()
     }
 }
 

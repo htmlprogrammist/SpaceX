@@ -73,7 +73,6 @@ final class RocketDetailViewController: UIViewController {
         return overview
     }()
     lazy var imageCollectionView = ImagesView(imagesUrls: rocket.flickrImages ?? [])
-    
     lazy var enginesView: OverviewView = {
         let labels = ["Type", "Layout", "Version", "Amount", "Propellant 1", "Propellant 2"]
         let data = [rocket.engines?.type, rocket.engines?.layout, rocket.engines?.version, "\(rocket.engines?.number ?? 0)", rocket.engines?.propellant1, rocket.engines?.propellant2]
@@ -111,6 +110,10 @@ final class RocketDetailViewController: UIViewController {
         button.setImage(UIImage(named: "link")?.withRenderingMode(.alwaysTemplate), for: .normal)
         button.tintColor = .coral
         button.addTarget(self, action: #selector(openWiki), for: .touchUpInside)
+        button.backgroundColor = .white
+//        button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+//        button.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10)
+        button.layer.cornerRadius = 16
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -141,7 +144,7 @@ final class RocketDetailViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        UIView.transition(with: contentView, duration: 0.6, options: .curveEaseInOut, animations: { [self] in
+        UIView.transition(with: contentView, duration: 0.4, options: [.transitionFlipFromTop, .curveEaseOut], animations: { [self] in
             contentView.alpha = 1
         }, completion: nil)
     }
@@ -152,11 +155,26 @@ final class RocketDetailViewController: UIViewController {
         gradientLayer.frame = imageView.layer.bounds
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        UIView.transition(with: contentView, duration: 0.15, options: [.transitionFlipFromTop, .curveEaseOut], animations: { [self] in
+            contentView.alpha = 0
+        }, completion: nil)
+    }
+    
     private func setupView() {
         view.addSubview(scrollView)
         view.addSubview(closeButton)
         
         scrollView.addSubview(topView)
+        scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 20, right: 0)
         
         topView.addSubview(imageView)
         imageView.layer.addSublayer(gradientLayer)
@@ -187,6 +205,7 @@ final class RocketDetailViewController: UIViewController {
             imageView.heightAnchor.constraint(equalTo: imageView.widthAnchor, multiplier: 383/414),
             
             titleLabel.leadingAnchor.constraint(equalTo: topView.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: topView.trailingAnchor, constant: -10),
             titleLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -20),
         ])
     }
@@ -217,12 +236,12 @@ final class RocketDetailViewController: UIViewController {
             overviewView.topAnchor.constraint(equalTo: descriptionView.descriptionLabel.bottomAnchor, constant: 30),
             overviewView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-//            imageCollectionView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
-//            imageCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-//            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            imageCollectionView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 20),
+            imageCollectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            imageCollectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
-            enginesView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 30),
-//            enginesView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
+//            enginesView.topAnchor.constraint(equalTo: overviewView.mainStackView.bottomAnchor, constant: 30),
+            enginesView.topAnchor.constraint(equalTo: imageCollectionView.collectionView.bottomAnchor, constant: 30),
             enginesView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             enginesView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             
@@ -247,9 +266,10 @@ final class RocketDetailViewController: UIViewController {
         contentView.addSubview(footer)
         NSLayoutConstraint.activate([
             footer.topAnchor.constraint(equalTo: wikiButton.bottomAnchor),
-            footer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            footer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
-            footer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            footer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            footer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            footer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            footer.heightAnchor.constraint(equalToConstant: 20)
         ])
     }
     
@@ -259,7 +279,9 @@ final class RocketDetailViewController: UIViewController {
     
     @objc func openWiki() {
         let destination = RocketWikiViewController()
-        navigationController?.pushViewController(destination, animated: true)
+        destination.loadRequest(url: rocket.wikipedia ?? "")
+        destination.modalPresentationStyle = .fullScreen
+        present(destination, animated: true, completion: nil)
     }
 }
 
