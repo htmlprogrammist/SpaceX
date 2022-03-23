@@ -63,6 +63,11 @@ class ShadowButton: UIButton {
         updateShadows()
     }
     
+    override func setImage(_ image: UIImage?, for state: UIControl.State) {
+        super.setImage(image, for: state)
+        bringSubviewToFront(imageView!)
+    }
+    
     private func setupView() {
         semanticContentAttribute = .forceRightToLeft
         setTitle(title, for: .normal)
@@ -78,8 +83,12 @@ class ShadowButton: UIButton {
         contentEdgeInsets = UIEdgeInsets(top: 5, left: 10, bottom: 5, right: 10)
         layer.cornerRadius = frame.height / 2
         
+        // Shadows
+        layer.insertSublayer(whiteShadow, at: 0)
+        layer.insertSublayer(greyShadow, at: 0)
+        layer.cornerRadius = bounds.height / 2
+        
         setInsets()
-        addShadows()
     }
     
     private func setInsets() {
@@ -95,13 +104,6 @@ class ShadowButton: UIButton {
 
 // MARK: - Shadows
 extension ShadowButton {
-    
-    private func addShadows() {
-        layer.insertSublayer(whiteShadow, at: 0)
-        layer.insertSublayer(greyShadow, at: 0)
-        layer.cornerRadius = bounds.height / 2
-    }
-    
     private func updateShadows() {
         whiteShadow.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.height / 2).cgPath
         greyShadow.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: bounds.height / 2).cgPath
