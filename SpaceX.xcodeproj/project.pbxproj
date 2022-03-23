@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F003FB0427EB836500218F35 /* ShadowButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F003FB0327EB836500218F35 /* ShadowButton.swift */; };
 		F0711A7E27D4D553008806C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0711A7D27D4D553008806C7 /* AppDelegate.swift */; };
 		F0711A8727D4D555008806C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8627D4D555008806C7 /* Assets.xcassets */; };
 		F0711A8A27D4D555008806C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F0711A8827D4D555008806C7 /* LaunchScreen.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		F003FB0327EB836500218F35 /* ShadowButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShadowButton.swift; sourceTree = "<group>"; };
 		F0711A7A27D4D553008806C7 /* SpaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0711A7D27D4D553008806C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F0711A8627D4D555008806C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				F088B70727E5B33400D4DF05 /* DescriptionView.swift */,
 				F088B70927E5CDC200D4DF05 /* OverviewView.swift */,
 				F088B70B27E5DD8B00D4DF05 /* ImagesView.swift */,
+				F003FB0327EB836500218F35 /* ShadowButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				F0711A9F27D4D747008806C7 /* LaunchpadsViewController.swift in Sources */,
 				F0711AB027D4D8E7008806C7 /* UIViewController.swift in Sources */,
 				F0FCDC7D27E331E300EAFDA2 /* LaunchesCollectionViewCell.swift in Sources */,
+				F003FB0427EB836500218F35 /* ShadowButton.swift in Sources */,
 				F0711A9B27D4D710008806C7 /* RocketsViewController.swift in Sources */,
 				F088B70E27E5DF1200D4DF05 /* ImagesCollectionViewCell.swift in Sources */,
 				F0711A9D27D4D729008806C7 /* LaunchesViewController.swift in Sources */,

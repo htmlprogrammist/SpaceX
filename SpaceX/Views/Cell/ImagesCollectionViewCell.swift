@@ -40,6 +40,20 @@ class ImagesCollectionViewCell: UICollectionViewCell {
     private func setupView() {
         contentView.addSubview(backgroundViewCell)
         contentView.addSubview(imageView)
+        
+        // Shadows
+        contentView.layer.cornerRadius = 7
+        contentView.layer.borderWidth = 1.0
+        contentView.layer.borderColor = UIColor.clear.cgColor
+        contentView.layer.masksToBounds = true
+        layer.backgroundColor = UIColor.white.cgColor
+        layer.shadowColor = UIColor.shadow.cgColor
+        layer.shadowOffset = CGSize(width: 1.5, height: 1.5)
+        layer.shadowRadius = 1.5
+        layer.shadowOpacity = 1.0
+        layer.cornerRadius = 7
+        layer.masksToBounds = false
+        layer.shadowPath = UIBezierPath(roundedRect: bounds, cornerRadius: contentView.layer.cornerRadius).cgPath
     }
     
     private func setConstraints() {
