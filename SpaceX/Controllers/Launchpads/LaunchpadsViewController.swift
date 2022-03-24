@@ -9,7 +9,7 @@ import UIKit
 
 final class LaunchpadsViewController: UICollectionViewController {
     
-    //    private var launchpads = [Launchpad]()
+//    private var launchpads = [Launchpad]()
     private let networkManager: NetworkManagerProtocol
     private let transitionManager: TransitionManagerProtocol
     

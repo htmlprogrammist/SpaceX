@@ -33,7 +33,7 @@ final class RocketDetailViewController: UIViewController {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
-    lazy var gradientLayer: CAGradientLayer = {
+    private lazy var gradientLayer: CAGradientLayer = {
         let layer = CAGradientLayer()
         layer.colors = [UIColor.clear.cgColor, UIColor.black.withAlphaComponent(0.7).cgColor]
         layer.locations = [0.5, 1]
@@ -65,35 +65,35 @@ final class RocketDetailViewController: UIViewController {
         return view
     }()
     lazy var descriptionView = DescriptionView(text: rocket.rocketDescription ?? "")
-    lazy var overviewView: OverviewView = {
+    private lazy var overviewView: OverviewView = {
         let labels = ["First launch", "Launch cost", "Success", "Mass", "Height", "Diameter"]
         let formattedDateOfFirstFlight = (rocket.firstFlight ?? "1970-01-01").parseDate(dateFormat: "yyyy-MM-dd").formatDate()
         let data = [formattedDateOfFirstFlight, "\(rocket.costPerLaunch ?? 0)$", "\(rocket.successRatePct ?? 0)%", "\(rocket.mass?.kg ?? 0) kg", "\(rocket.height?.meters ?? 0) meters", "\(rocket.diameter?.meters ?? 0) meters"]
         let overview = OverviewView(titleText: "Overview", labels: labels, data: data)
         return overview
     }()
-    lazy var imageCollectionView = ImagesView(imagesUrls: rocket.flickrImages ?? [])
-    lazy var enginesView: OverviewView = {
+    private lazy var imageCollectionView = ImagesView(imagesUrls: rocket.flickrImages ?? [])
+    private lazy var enginesView: OverviewView = {
         let labels = ["Type", "Layout", "Version", "Amount", "Propellant 1", "Propellant 2"]
         let data = [rocket.engines?.type, rocket.engines?.layout, rocket.engines?.version, "\(rocket.engines?.number ?? 0)", rocket.engines?.propellant1, rocket.engines?.propellant2]
         let overview = OverviewView(titleText: "Engines", labels: labels, data: data)
         return overview
     }()
-    lazy var firstStageView: OverviewView = {
+    private lazy var firstStageView: OverviewView = {
         let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust (sea level)", "Thrust (vacuum)"]
         let formattedTrueFalse = (rocket.firstStage?.reusable ?? false) ? "Yes": "No"
         let data = [formattedTrueFalse, "\(rocket.firstStage?.engines ?? 0)", "\(rocket.firstStage?.fuelAmountTons ?? 0) tons", "\(rocket.firstStage?.burnTimeSEC ?? 0) seconds", "\(rocket.firstStage?.thrustSeaLevel?.kN ?? 0) kN", "\(rocket.firstStage?.thrustVacuum?.kN ?? 0) kN"]
         let overview = OverviewView(titleText: "First stage", labels: labels, data: data)
         return overview
     }()
-    lazy var secondStageView: OverviewView = {
+    private lazy var secondStageView: OverviewView = {
         let labels = ["Reusable", "Engines amount", "Fuel amount", "Burning time", "Thrust"]
         let formattedTrueFalse = (rocket.secondStage?.reusable ?? false) ? "Yes": "No"
         let data = [formattedTrueFalse, "\(rocket.secondStage?.engines ?? 0)", "\(rocket.secondStage?.fuelAmountTons ?? 0) tons", "\(rocket.secondStage?.burnTimeSEC ?? 0) seconds", "\(rocket.secondStage?.thrust?.kN ?? 0) kN"]
         let overview = OverviewView(titleText: "Second stage", labels: labels, data: data)
         return overview
     }()
-    lazy var landingLegsView: OverviewView = {
+    private lazy var landingLegsView: OverviewView = {
         let labels = ["Amount", "Material"]
         let data = ["\(rocket.landingLegs?.number ?? 0)", rocket.landingLegs?.material]
         let overview = OverviewView(titleText: "Landing legs", labels: labels, data: data)
@@ -101,14 +101,12 @@ final class RocketDetailViewController: UIViewController {
     }()
     
     private lazy var materialsLabel = UILabel(text: "Materials", size: 24, weight: .bold)
-    
     private lazy var wikiButton: ShadowButton = {
         let button = ShadowButton(title: "Wiki", imageName: "link")
         button.addTarget(self, action: #selector(openWiki), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
-    
     private lazy var footer: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -145,12 +143,6 @@ final class RocketDetailViewController: UIViewController {
         super.viewDidLayoutSubviews()
         
         gradientLayer.frame = imageView.layer.bounds
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -257,8 +249,6 @@ final class RocketDetailViewController: UIViewController {
         contentView.addSubview(footer)
         NSLayoutConstraint.activate([
             footer.topAnchor.constraint(equalTo: wikiButton.bottomAnchor),
-            footer.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            footer.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             footer.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             footer.heightAnchor.constraint(equalToConstant: 20)
         ])
