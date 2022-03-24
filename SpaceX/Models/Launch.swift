@@ -30,11 +30,11 @@ struct Launch: Codable {
 }
 
 struct Links: Codable {
-    var patch: Patch?
-    var reddit: Reddit?
-    var flickr: Flickr?
-    var youtube: String?
-    var wikipedia: String?
+    let patch: Patch?
+    let reddit: Reddit?
+    let flickr: Flickr?
+    let youtube: String?
+    let wikipedia: String?
     
     enum CodingKeys: String, CodingKey {
         case patch, reddit, flickr
@@ -44,18 +44,18 @@ struct Links: Codable {
 }
 
 struct Patch: Codable {
-    var small: String?
-    var large: String?
+    let small: String?
+    let large: String?
 }
 
 struct Reddit: Codable {
-    var campaign: String?
-    var launch: String?
-    var media: String?
-    var recovery: String?
+    let campaign: String?
+    let launch: String?
+    let media: String?
+    let recovery: String?
 }
 
 struct Flickr: Codable {
-    var small: [String]?
-    var original: [String]?
+    let small: [String]?
+    let original: [String]?
 }
