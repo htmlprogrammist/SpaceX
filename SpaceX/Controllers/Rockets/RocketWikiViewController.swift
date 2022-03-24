@@ -13,19 +13,30 @@ final class RocketWikiViewController: UIViewController {
     lazy var webView = WKWebView()
     lazy var toolBar: UIToolbar = {
         let toolBar = UIToolbar()
-        toolBar.items = [backButton, forwardButton, shareButton, safariButton]
+        toolBar.items = [backButton, spacer, forwardButton, spacer, shareButton, spacer, safariButton]
         toolBar.tintColor = .coral
         toolBar.translatesAutoresizingMaskIntoConstraints = false
         return toolBar
     }()
     
-    lazy var backButton = UIBarButtonItem(image: UIImage(named: "chevronBackward"), style: .plain, target: self, action: #selector(backAction))
-    lazy var forwardButton = UIBarButtonItem(image: UIImage(named: "chevronForward"), style: .plain, target: self, action: #selector(forwardAction))
-    lazy var shareButton = UIBarButtonItem(image: UIImage(named: "shareIcon"), style: .plain, target: self, action: #selector(shareAction))
+    lazy var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "chevronBackward"), style: .plain, target: self, action: #selector(backAction))
+        button.isEnabled = false
+        return button
+    }()
+    lazy var forwardButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "chevronForward"), style: .plain, target: self, action: #selector(forwardAction))
+        button.isEnabled = false
+        return button
+    }()
+    lazy var shareButton = UIBarButtonItem(image: UIImage(named: "share"), style: .plain, target: self, action: #selector(shareAction))
     lazy var safariButton = UIBarButtonItem(image: UIImage(named: "safari"), style: .plain, target: self, action: #selector(safariAction))
+    lazy var spacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "reload"), style: .plain, target: self, action: #selector(reloadPage))
         
         setupView()
         setConstraints()
@@ -34,6 +45,7 @@ final class RocketWikiViewController: UIViewController {
     private func setupView() {
         view.addSubview(webView)
         webView.translatesAutoresizingMaskIntoConstraints = false
+        webView.navigationDelegate = self
         view.addSubview(toolBar)
     }
     
@@ -50,7 +62,7 @@ final class RocketWikiViewController: UIViewController {
         ])
     }
     
-    @objc private func loadRequest(url: String) {
+    @objc func loadRequest(url: String) {
         guard let url = URL(string: url) else { return }
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
@@ -76,6 +88,10 @@ extension RocketWikiViewController {
     
     @objc private func safariAction() {
         
+    }
+    
+    @objc private func reloadPage() {
+        webView.reload()
     }
 }
 
