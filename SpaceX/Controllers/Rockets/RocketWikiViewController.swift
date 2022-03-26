@@ -45,8 +45,6 @@ final class RocketWikiViewController: UIViewController {
         loadRequest(url: url)
         setupView()
         setConstraints()
-        
-        title = webView.title // not works
     }
     
     init(url: String) {
@@ -123,6 +121,7 @@ extension RocketWikiViewController: WKNavigationDelegate {
 //    }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        title = webView.title
         backButton.isEnabled = webView.canGoBack
         forwardButton.isEnabled = webView.canGoForward
     }
