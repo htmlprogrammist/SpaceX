@@ -10,6 +10,8 @@ import WebKit
 
 final class RocketWikiViewController: UIViewController {
     
+    private let url: String
+    
     lazy var webView = WKWebView()
     lazy var toolBar: UIToolbar = {
         let toolBar = UIToolbar()
@@ -36,10 +38,30 @@ final class RocketWikiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "reload"), style: .plain, target: self, action: #selector(reloadPage))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "chevronBackward")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(dismissThisVC))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "reload")?.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(reloadPage))
+        navigationController?.navigationBar.tintColor = .coral
         
+        loadRequest(url: url)
         setupView()
         setConstraints()
+        
+        title = webView.title // not works
+    }
+    
+    init(url: String) {
+        self.url = url
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    private func loadRequest(url: String) {
+        guard let url = URL(string: url) else { return }
+        let urlRequest = URLRequest(url: url)
+        webView.load(urlRequest)
     }
     
     private func setupView() {
@@ -62,10 +84,8 @@ final class RocketWikiViewController: UIViewController {
         ])
     }
     
-    @objc func loadRequest(url: String) {
-        guard let url = URL(string: url) else { return }
-        let urlRequest = URLRequest(url: url)
-        webView.load(urlRequest)
+    @objc private func dismissThisVC() {
+        dismiss(animated: true, completion: nil)
     }
 }
 

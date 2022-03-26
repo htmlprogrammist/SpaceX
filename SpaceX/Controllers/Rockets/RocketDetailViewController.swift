@@ -259,8 +259,7 @@ final class RocketDetailViewController: UIViewController {
     }
     
     @objc func openWiki() {
-        let destination = RocketWikiViewController()
-        destination.loadRequest(url: rocket.wikipedia ?? "")
+        let destination = UINavigationController(rootViewController: RocketWikiViewController(url: rocket.wikipedia ?? ""))
         destination.modalPresentationStyle = .fullScreen
         present(destination, animated: true, completion: nil)
     }
