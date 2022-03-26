@@ -10,10 +10,15 @@ import WebKit
 
 final class RocketWikiViewController: UIViewController {
     
-    private let url: String
+    private let url: URL
     
-    lazy var webView = WKWebView()
-    lazy var toolBar: UIToolbar = {
+    private lazy var webView: WKWebView = {
+        let webView = WKWebView()
+        webView.navigationDelegate = self
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    private lazy var toolBar: UIToolbar = {
         let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         toolBar.items = [backButton, spacer, forwardButton, spacer, shareButton, spacer, safariButton]
         toolBar.tintColor = .coral
@@ -47,7 +52,7 @@ final class RocketWikiViewController: UIViewController {
         setConstraints()
     }
     
-    init(url: String) {
+    init(url: URL) {
         self.url = url
         super.init(nibName: nil, bundle: nil)
     }
@@ -56,16 +61,13 @@ final class RocketWikiViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    private func loadRequest(url: String) {
-        guard let url = URL(string: url) else { return }
+    private func loadRequest(url: URL) {
         let urlRequest = URLRequest(url: url)
         webView.load(urlRequest)
     }
     
     private func setupView() {
         view.addSubview(webView)
-        webView.translatesAutoresizingMaskIntoConstraints = false
-        webView.navigationDelegate = self
         view.addSubview(toolBar)
     }
     
@@ -101,11 +103,13 @@ extension RocketWikiViewController {
     }
     
     @objc private func shareAction() {
-        
+        let activityController = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        activityController.excludedActivityTypes = [.markupAsPDF, .openInIBooks, .print, .saveToCameraRoll, .assignToContact]
+        present(activityController, animated: true, completion: nil)
     }
     
     @objc private func safariAction() {
-        
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @objc private func reloadPage() {
