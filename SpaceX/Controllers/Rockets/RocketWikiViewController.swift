@@ -14,7 +14,7 @@ final class RocketWikiViewController: UIViewController {
     
     lazy var webView = WKWebView()
     lazy var toolBar: UIToolbar = {
-        let toolBar = UIToolbar()
+        let toolBar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         toolBar.items = [backButton, spacer, forwardButton, spacer, shareButton, spacer, safariButton]
         toolBar.tintColor = .coral
         toolBar.translatesAutoresizingMaskIntoConstraints = false
