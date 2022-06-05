@@ -3,7 +3,7 @@
 A client for a small part of the unofficial [SpaceX API](https://github.com/r-spacex/SpaceX-API)
 
 # Demo
-<link to the video on youtube.com>
+<a href="https://youtu.be/BqkWHr16VIk"><img src="https://user-images.githubusercontent.com/60363270/172047795-c0c28973-76a8-4d71-9d78-e81785645271.jpg"></a>
 
 # Description
 [Link to the technical specification in Notion](https://htmlprogrammist.notion.site/Task-11-RSS-1acee8c171a04ea98e6935dac9d97172)
